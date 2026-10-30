@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { gallery } from "@/data/content";
 
-export const metadata: Metadata = { title: "Gallery — Hotel Lekhnath View Tower & Eco Farm" };
+export const metadata: Metadata = { title: "Gallery — Hotel Young's Stupa" };
 
 export default function GalleryPage() {
   return (
