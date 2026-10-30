@@ -4,15 +4,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        pine: { 950: "#0C1F1A", 900: "#122B23", 800: "#1A3A2F", 700: "#24503F", 100: "#DCE8E1", 50: "#F2F6F3" },
-        sand: { 500: "#C99B5F", 400: "#D9AE77", 100: "#F5EBDD" },
-        cream: "#FAF7F2"
+        pine: { 950: "#081426", 900: "#0B1F3A", 800: "#123058", 700: "#1B4480", 100: "#D8E2F0", 50: "#EFF4FA" },
+        sand: { 500: "#C8A24B", 400: "#DDBC72", 300: "#EAD9A8", 100: "#F4ECD7" },
+        cream: "#FAF8F3"
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"]
       },
-      boxShadow: { soft: "0 20px 50px -20px rgb(12 31 26 / 0.35)", card: "0 10px 30px -12px rgb(12 31 26 / 0.25)" }
+      boxShadow: { soft: "0 20px 50px -20px rgb(8 20 38 / 0.35)", card: "0 10px 30px -12px rgb(8 20 38 / 0.25)" }
     }
   },
   plugins: []
