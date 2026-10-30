@@ -23,16 +23,20 @@ export default function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${dark ? "bg-cream/95 shadow-card backdrop-blur" : "bg-gradient-to-b from-pine-950/60 to-transparent"}`}>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className={`leading-tight ${dark ? "text-pine-950" : "text-white"}`} onClick={() => setOpen(false)}>
-          <span className="font-display text-[17px] font-semibold tracking-tight">Lekhnath View Tower</span>
-          <span className={`block text-[10px] font-medium uppercase tracking-[0.22em] ${dark ? "text-sand-500" : "text-sand-400"}`}>Hotel & Eco Farm · Pokhara</span>
+          <span className="font-display text-[17px] font-semibold tracking-tight">Robin's Nest</span>
+          <span className={`block text-[10px] font-medium uppercase tracking-[0.22em] ${dark ? "text-sand-500" : "text-sand-400"}`}>Deorali · Pokhara</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className={`text-sm font-medium ${dark ? "text-pine-900" : "text-white/90"} hover:opacity-70`}>{l.label}</Link>
           ))}
-          <a href={`tel:${hotel.phone}`} className="flex items-center gap-2 rounded-full bg-sand-500 px-4 py-2 text-sm font-semibold text-white shadow-card">
-            <Phone size={15} /> {hotel.phoneDisplay}
-          </a>
+          {hotel.phone ? (
+            <a href={`tel:${hotel.phone}`} className="flex items-center gap-2 rounded-full bg-sand-500 px-4 py-2 text-sm font-semibold text-white shadow-card">
+              <Phone size={15} /> {hotel.phoneDisplay}
+            </a>
+          ) : (
+            <Link href="/book" className="flex items-center gap-2 rounded-full bg-sand-500 px-4 py-2 text-sm font-semibold text-white shadow-card">Book a room</Link>
+          )}
         </nav>
         <button aria-label="Menu" onClick={() => setOpen(!open)} className={`flex h-11 w-11 items-center justify-center rounded-full md:hidden ${dark ? "text-pine-950" : "text-white"}`}>
           {open ? <X size={24} /> : <Menu size={24} />}
