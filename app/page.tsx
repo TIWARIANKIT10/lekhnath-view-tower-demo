@@ -40,21 +40,21 @@ export default function Home() {
           </div>
         </Reveal>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {rooms.map((r) => <Reveal key={r.slug}><RoomCard room={r} /></Reveal>)}
+          {rooms.map((r, idx) => <Reveal key={r.slug} delay={idx * 0.1}><RoomCard room={r} /></Reveal>)}
         </div>
       </section>
 
-      <section className="bg-pine-950 py-14 md:py-20">
+      <section className="sheen overflow-hidden bg-pine-950 py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-400">Experience</p>
             <h2 className="mt-1 font-display text-3xl font-semibold text-white sm:text-4xl">One hotel, three views</h2>
           </Reveal>
           <div className="no-scrollbar -mx-4 mt-7 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 lg:grid lg:grid-cols-3 lg:overflow-visible">
-            {experiences.map((e) => (
-              <Reveal key={e.title} className="w-[82%] shrink-0 snap-start sm:w-[55%] lg:w-auto">
+            {experiences.map((e, idx) => (
+              <Reveal key={e.title} delay={idx * 0.12} className="w-[82%] shrink-0 snap-start sm:w-[55%] lg:w-auto">
                 <article className="relative aspect-[3/4] overflow-hidden rounded-3xl lg:aspect-[4/5]">
-                  <Image src={e.img} alt={e.title} fill sizes="(max-width: 1024px) 82vw, 33vw" className="object-cover" />
+                  <Image src={e.img} alt={e.title} fill sizes="(max-width: 1024px) 82vw, 33vw" className="object-cover transition duration-700 hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-pine-950/85 via-transparent to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-5">
                     <h3 className="font-display text-2xl font-semibold text-white">{e.title}</h3>
@@ -77,8 +77,8 @@ export default function Home() {
           <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">Guests say it best</h2>
         </Reveal>
         <div className="mt-7 grid gap-4 md:grid-cols-3">
-          {reviews.map((r) => (
-            <Reveal key={r.text}>
+          {reviews.map((r, idx) => (
+            <Reveal key={r.text} delay={idx * 0.1}>
               <figure className="h-full rounded-3xl bg-white p-5 shadow-card">
                 <Quote size={20} className="text-sand-500" />
                 <blockquote className="mt-3 text-[15px] leading-relaxed text-pine-900">“{r.text}”</blockquote>

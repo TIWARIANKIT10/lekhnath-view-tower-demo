@@ -16,12 +16,39 @@ export const hotel = {
   googleRating: 4.8,
   googleReviews: 20,
   bookingRating: 9.8,
+  // Booking.com integration: paste the hotel's exact Booking.com property URL
+  // here once confirmed with the hotel, and every "Book on Booking.com" button
+  // will go straight to that property page (with dates/guests attached).
+  // While empty, buttons fall back to a Booking.com search for this exact
+  // property name + the guest's dates — same result, one extra click.
+  bookingComPropertyUrl: "" as string,
   checkIn: "12:00 PM",
   checkOut: "12:00 PM",
 } as const;
 
 export const waLink = (message: string) =>
   `https://wa.me/${hotel.whatsapp}?text=${encodeURIComponent(message)}`;
+
+// Booking.com deep link carrying the guest's exact dates / guests / rooms.
+// Uses Booking.com's standard search parameters (checkin, checkout,
+// group_adults, no_rooms). If the exact property URL is set above, the same
+// parameters are attached to the property page instead.
+export const bookingComLink = (checkIn?: string, checkOut?: string, guests?: string) => {
+  const p = new URLSearchParams();
+  if (checkIn) p.set("checkin", checkIn);
+  if (checkOut) p.set("checkout", checkOut);
+  p.set("group_adults", guests && /^\d+$/.test(guests) ? guests : "2");
+  p.set("no_rooms", "1");
+  p.set("group_children", "0");
+  if (hotel.bookingComPropertyUrl) {
+    const sep = hotel.bookingComPropertyUrl.includes("?") ? "&" : "?";
+    return `${hotel.bookingComPropertyUrl}${sep}${p.toString()}`;
+  }
+  p.set("ss", "Hotel Lekhnath View Tower and Eco Farm, Lekhnath, Pokhara, Nepal");
+  p.set("dest_type", "hotel");
+  p.set("sb_price_type", "total");
+  return `https://www.booking.com/searchresults.html?${p.toString()}`;
+};
 
 export const bookMessage = (room?: string, checkIn?: string, checkOut?: string, guests?: string) => {
   const parts = [`Namaste ${hotel.name}, I would like to book directly.`];

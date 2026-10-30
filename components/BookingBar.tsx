@@ -1,7 +1,11 @@
 "use client";
+// Booking v2: one set of dates/guests, two ways to book —
+//  1) Book direct on WhatsApp (best rate, no commission)
+//  2) Book on Booking.com (deep link carrying the same dates/guests)
 import { useMemo, useState } from "react";
-import { ArrowRight } from "lucide-react";
-import { waLink, bookMessage } from "@/lib/config";
+import { motion } from "framer-motion";
+import { ArrowRight, BadgeCheck } from "lucide-react";
+import { waLink, bookMessage, bookingComLink } from "@/lib/config";
 import { rooms } from "@/data/content";
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -19,11 +23,14 @@ export default function BookingBar({ defaultRoom = "" }: { defaultRoom?: string 
   const sel = rooms.find((r) => r.name === room);
   const total = sel && nights ? sel.price * nights : null;
 
-  const field = "w-full rounded-xl border border-pine-100 bg-white px-3 py-3 text-[15px] text-pine-950 outline-none focus:border-sand-500";
+  const field = "w-full rounded-xl border border-pine-100 bg-white px-3 py-3 text-[15px] text-pine-950 outline-none transition focus:border-sand-500 focus:ring-2 focus:ring-sand-500/25";
   const label = "mb-1 block text-[11px] font-bold uppercase tracking-wider text-pine-700/70";
   return (
-    <div className="rounded-3xl bg-white p-4 shadow-soft sm:p-5">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_0.8fr_auto]">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="rounded-3xl bg-white/95 p-4 shadow-soft ring-1 ring-pine-950/5 backdrop-blur sm:p-5">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div><label className={label}>Room</label>
           <select className={field} value={room} onChange={(e) => setRoom(e.target.value)}>
             <option value="">Any room</option>
@@ -37,17 +44,24 @@ export default function BookingBar({ defaultRoom = "" }: { defaultRoom?: string 
           <select className={field} value={guests} onChange={(e) => setGuests(e.target.value)}>
             {[1, 2, 3, 4, 5, 6].map((g) => <option key={g} value={g}>{g}</option>)}
           </select></div>
-        <div className="flex items-end">
-          <a target="_blank" rel="noreferrer"
-            href={waLink(bookMessage(room || undefined, ci, co, guests))}
-            className="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-pine-900 px-5 py-3 font-bold text-white active:scale-[0.98] lg:w-auto">
-            {total ? `$${total} · Book` : "Check price"} <ArrowRight size={17} />
-          </a>
-        </div>
       </div>
-      <p className="mt-3 text-center text-xs text-pine-700/70 sm:text-left">
-        {nights ? `${nights} night${nights > 1 ? "s" : ""} · ` : ""}Best rate direct — no OTA commission. Confirms on WhatsApp in minutes.
+
+      <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
+        <motion.a whileTap={{ scale: 0.98 }} target="_blank" rel="noreferrer"
+          href={waLink(bookMessage(room || undefined, ci, co, guests))}
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-pine-900 px-5 py-3.5 font-bold text-white shadow-card">
+          {total ? `$${total} · Book direct` : "Book direct"} <ArrowRight size={17} />
+        </motion.a>
+        <motion.a whileTap={{ scale: 0.98 }} target="_blank" rel="noreferrer"
+          href={bookingComLink(ci, co, guests)}
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#003580] px-5 py-3.5 font-bold text-white shadow-card">
+          Book on Booking.com
+        </motion.a>
+      </div>
+      <p className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-center text-xs text-pine-700/70 sm:justify-start">
+        <BadgeCheck size={14} className="text-sand-500" />
+        {nights ? `${nights} night${nights > 1 ? "s" : ""} · ` : ""}Best rate direct on WhatsApp — no commission. Or book instantly on Booking.com with the same dates.
       </p>
-    </div>
+    </motion.div>
   );
 }
