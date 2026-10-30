@@ -1,114 +1,123 @@
-import Image from "next/image";
-import Link from "next/link";
-import { MapPin, Quote, Star, Wifi, Car, UtensilsCrossed, BellRing } from "lucide-react";
-import Hero from "@/components/Hero";
-import BookingBar from "@/components/BookingBar";
-import RoomCard from "@/components/RoomCard";
-import Reveal from "@/components/Reveal";
-import { rooms, experiences, reviews, distances } from "@/data/content";
-import { hotel } from "@/lib/config";
+const REPO = "https://github.com/TIWARIANKIT10/lekhnath-view-tower-demo";
+const PREV = (b: string) =>
+  "https://lekhnath-view-tower-demo-git-" + b.replaceAll("/", "-") + "-tiwariankit10s-projects.vercel.app";
 
-const perks = [
-  { icon: Wifi, label: "Free Wi-Fi" }, { icon: Car, label: "Free parking" },
-  { icon: UtensilsCrossed, label: "Rooftop restaurant" }, { icon: BellRing, label: "24h front desk" },
+type Site = {
+  n: string; name: string; area: string; badge: string; pitch: string;
+  chips: string[]; colors: [string, string]; site: string; code: string;
+};
+
+const sites: Site[] = [
+  { n: "Hotel #0", name: "Hotel Lekhnath View Tower & Eco Farm", area: "Lekhnath · the first target", badge: "Branch",
+    pitch: "The original demo that started this business — 360° view tower, eco farm, WhatsApp booking. Now on its own branch, like every other hotel.",
+    chips: ["4.8★ Google", "9.8 Booking.com", "+977 985-6052139"], colors: ["#123528", "#d9a441"],
+    site: PREV("hotel/lekhnath-view-tower"), code: REPO + "/tree/hotel/lekhnath-view-tower" },
+  { n: "Enhanced v2", name: "View Tower — Enhanced Edition", area: "Same hotel, Framer Motion + Three.js upgrade", badge: "Branch",
+    pitch: "The cinematic upgrade of the demo: firefly hero, motion design, Booking.com links.",
+    chips: ["Branch design-v2", "Booking.com links"], colors: ["#0c2b21", "#e8b34b"],
+    site: PREV("design-v2"), code: REPO + "/tree/design-v2" },
+  { n: "Hotel #1", name: "Grand Hotel Begnas", area: "Begnas Sadak · 13 rooms", badge: "Branch",
+    pitch: "Loved (Expedia 10/10) but invisible — landline-only, no website at all.",
+    chips: ["Call booking", "+977 61-561129", "Navy / gold design"], colors: ["#0a1628", "#c9a24b"],
+    site: PREV("hotel/grand-hotel-begnas"), code: REPO + "/tree/hotel/grand-hotel-begnas" },
+  { n: "Hotel #2", name: "Hotel Seven Lake Paradise", area: "Begnastaal-11 · 15 rooms, 3-star", badge: "Branch",
+    pitch: "Premium rooms, scattered reputation — the fix is one strong direct channel.",
+    chips: ["WhatsApp booking", "NPR 8,790–16,538", "Teal / coral design"], colors: ["#04211d", "#ff7a59"],
+    site: PREV("hotel/hotel-seven-lake-paradise"), code: REPO + "/tree/hotel/hotel-seven-lake-paradise" },
+  { n: "Hotel #3", name: "Seven Lakes Resort", area: "29 Bhandardhik · 19 rooms, two pools", badge: "Branch",
+    pitch: "688 Google reviews of demand leaking through an old http site.",
+    chips: ["WhatsApp booking", "Google 4.7 · 688", "Forest / amber design"], colors: ["#12291a", "#e8a33d"],
+    site: PREV("hotel/seven-lakes-resort"), code: REPO + "/tree/hotel/seven-lakes-resort" },
+  { n: "Hotel #4", name: "Hotel Young's Stupa", area: "Lekhnath-09 · 12 rooms, rooftop", badge: "Branch",
+    pitch: "Guests rate it 9.7 — OTAs sell it from $7. Underpriced and unreachable.",
+    chips: ["Call booking", "Trip.com 9.7", "Plum / saffron design"], colors: ["#191423", "#e8a33d"],
+    site: PREV("hotel/hotel-youngs-stupa"), code: REPO + "/tree/hotel/hotel-youngs-stupa" },
+  { n: "Hotel #5", name: "Begnas Lake Front Guest House", area: "31 Majhikuna · 12 rooms, on the shore", badge: "Branch",
+    pitch: "Best shore in Majhikuna — its 'website' is its Facebook page.",
+    chips: ["WhatsApp booking", "Family-run · yoga hall", "Slate / terracotta design"], colors: ["#0c1b26", "#c75b39"],
+    site: PREV("hotel/begnas-lake-front-guest-house"), code: REPO + "/tree/hotel/begnas-lake-front-guest-house" },
+  { n: "Hotel #6", name: "Robin's Nest Hotel & Restaurant", area: "Deorali · garden hilltop, host Nima", badge: "Branch",
+    pitch: "Tripadvisor 4.8 and no phone number anywhere on the internet.",
+    chips: ["Booking.com-primary", "TA 4.8 · real quotes", "Olive / rose design"], colors: ["#1c2410", "#c25e7c"],
+    site: PREV("hotel/robins-nest"), code: REPO + "/tree/hotel/robins-nest" },
+  { n: "Hotel #7", name: "Rupakot Resort", area: "Rupakot ridge, 1,100 m · 42 rooms", badge: "Redesign",
+    pitch: "A proven 4-star resort (8.7 across 2,469 ratings) whose site undersells it.",
+    chips: ["WhatsApp booking", "Trivago 8.7 · 2,469", "Charcoal / copper design"], colors: ["#171310", "#a9713b"],
+    site: PREV("hotel/rupakot-resort"), code: REPO + "/tree/hotel/rupakot-resort" },
+];
+
+const queue: [string, string, string][] = [
+  ["#8", "The Begnas Lake Resort & Villas", "redesign tier"],
+  ["#9", "Annapurna Royal Camp", "luxury camp"],
+  ["#10", "Sanu Lake on de' Water", "lakeside"],
+  ["#11", "Begnas Yoga & Retreat", "retreat niche"],
+  ["#12", "Ram Homestay", "top-rated homestay"],
+  ["#13", "Serene Himalaya View", "view lodge"],
+  ["#14", "Tropical Escape – Patal Eco Villa", "eco villa"],
+  ["#15", "Chillgarden ECO Home", "eco stay"],
+  ["#16", "Lakefront Guest House (Majhikuna)", "guest house"],
+  ["#17", "Begnas Aqua Park Resort & Restaurant", "family resort"],
+  ["#18", "Hotel Day Break", "in-town hotel"],
+  ["#19", "Lake Wave Cottage & Restaurant", "cottages"],
+  ["#20", "Tiger Mountain Pokhara Lodge", "aspirational · last"],
 ];
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <section className="mx-auto -mt-14 max-w-6xl px-4 sm:px-6 md:-mt-10">
-        <div className="relative z-10"><BookingBar /></div>
-        <div className="mt-6 grid grid-cols-4 gap-2 pb-2">
-          {perks.map((p) => (
-            <div key={p.label} className="flex flex-col items-center gap-1.5 rounded-2xl bg-white/70 py-3 text-center">
-              <p.icon size={20} className="text-pine-800" />
-              <span className="px-1 text-[11px] font-semibold leading-tight text-pine-900 sm:text-xs">{p.label}</span>
-            </div>
-          ))}
+    <div className="wrap">
+      <header className="hero">
+        <div className="kicker">Ankit's Hotel Website Business · Lekhnath, Pokhara</div>
+        <h1>Every hotel website,<br /><em>one front door.</em></h1>
+        <p className="sub">This page is the main site now — the index of the whole Lekhnath Top-20 project. Open any hotel's website, jump to its code and owner-approach README, and see what's still in the queue.</p>
+        <div className="stats">
+          <div className="stat"><b>9</b>sites ready</div>
+          <div className="stat"><b>7 / 20</b>prospects done</div>
+          <div className="stat"><b>13</b>in the queue</div>
+          <div className="stat"><b>1</b>repo, one branch each</div>
         </div>
-      </section>
+        <div className="bar"><i /></div>
+        <p className="note"><b>How opening works:</b> every hotel — the View Tower included — lives on <b>its own branch</b> with its own Vercel preview. Those previews ask for <b>your Vercel login</b> first (deployment protection keeps them private until you pitch). The <b>Code + pitch</b> button always works: it opens the branch with its README — hotel facts, the pitch, and what to say to the owner.</p>
+      </header>
 
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
-        <Reveal>
-          <div className="mb-6 flex items-end justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-500">Stay</p>
-              <h2 className="mt-1 font-display text-3xl font-semibold sm:text-4xl">Rooms with a view</h2>
+      <h2>Ready to show</h2>
+      <div className="grid">
+        {sites.map((s) => (
+          <article className="card" key={s.name}>
+            <div className="thumb" style={{ background: `linear-gradient(120deg, ${s.colors[0]}, ${s.colors[1]})` }}>
+              <span className="num">{s.n}</span><span className="badge">{s.badge}</span>
             </div>
-            <Link href="/rooms" className="shrink-0 text-sm font-bold text-pine-800 underline underline-offset-4">All rooms</Link>
-          </div>
-        </Reveal>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {rooms.map((r) => <Reveal key={r.slug}><RoomCard room={r} /></Reveal>)}
-        </div>
-      </section>
-
-      <section className="bg-pine-950 py-14 md:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-400">Experience</p>
-            <h2 className="mt-1 font-display text-3xl font-semibold text-white sm:text-4xl">One hotel, three views</h2>
-          </Reveal>
-          <div className="no-scrollbar -mx-4 mt-7 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 lg:grid lg:grid-cols-3 lg:overflow-visible">
-            {experiences.map((e) => (
-              <Reveal key={e.title} className="w-[82%] shrink-0 snap-start sm:w-[55%] lg:w-auto">
-                <article className="relative aspect-[3/4] overflow-hidden rounded-3xl lg:aspect-[4/5]">
-                  <Image src={e.img} alt={e.title} fill sizes="(max-width: 1024px) 82vw, 33vw" className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-pine-950/85 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <h3 className="font-display text-2xl font-semibold text-white">{e.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-white/85">{e.line}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
-        <Reveal>
-          <div className="flex items-center gap-2">
-            <span className="flex">{[1,2,3,4,5].map((s) => <Star key={s} size={18} className="fill-sand-500 text-sand-500" />)}</span>
-            <span className="font-bold">{hotel.googleRating}</span>
-            <span className="text-sm text-pine-700/70">· {hotel.googleReviews} Google reviews</span>
-          </div>
-          <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">Guests say it best</h2>
-        </Reveal>
-        <div className="mt-7 grid gap-4 md:grid-cols-3">
-          {reviews.map((r) => (
-            <Reveal key={r.text}>
-              <figure className="h-full rounded-3xl bg-white p-5 shadow-card">
-                <Quote size={20} className="text-sand-500" />
-                <blockquote className="mt-3 text-[15px] leading-relaxed text-pine-900">“{r.text}”</blockquote>
-                <figcaption className="mt-4 text-xs font-bold uppercase tracking-wider text-pine-700/60">{r.source}</figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-12">
-          <div className="overflow-hidden rounded-3xl bg-pine-900 text-white shadow-soft md:grid md:grid-cols-2">
-            <div className="p-6 sm:p-8">
-              <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-sand-400"><MapPin size={14} /> Find us</p>
-              <h3 className="mt-2 font-display text-2xl font-semibold sm:text-3xl">Lekhnath — the city of seven lakes</h3>
-              <ul className="mt-5 space-y-3">
-                {distances.map((d) => (
-                  <li key={d.place} className="flex items-center justify-between border-b border-white/10 pb-3 text-[15px]">
-                    <span className="text-white/85">{d.place}</span><span className="font-bold">{d.time}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href={hotel.mapsUrl} target="_blank" rel="noreferrer" className="mt-6 block rounded-xl bg-white py-3.5 text-center font-bold text-pine-950">Get directions</a>
-              <p className="mt-3 text-xs text-white/50">*Rupa Lake distance from OTA listings — confirm on visit.</p>
+            <div className="body">
+              <div className="name">{s.name}</div>
+              <div className="meta">{s.area}</div>
+              <p className="pitch">{s.pitch}</p>
+              <div className="chips">
+                {s.chips.map((c) => <span className="chip" key={c}>{c}</span>)}
+                <span className="chip"><span className="dots">
+                  <span className="dot" style={{ background: s.colors[0] }} />
+                  <span className="dot" style={{ background: s.colors[1] }} />
+                </span></span>
+              </div>
+              <div className="links">
+                <a className="btn btn-site" href={s.site} target="_blank" rel="noreferrer">Open site</a>
+                <a className="btn btn-code" href={s.code} target="_blank" rel="noreferrer">Code + pitch</a>
+              </div>
             </div>
-            <div className="relative min-h-56">
-              <Image src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1400&auto=format&fit=crop" alt="Lake view" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
-            </div>
-          </div>
-        </Reveal>
-      </section>
-    </>
+          </article>
+        ))}
+      </div>
+
+      <h2>Still in the queue</h2>
+      <div className="queue">
+        {queue.map((q) => (
+          <div className="q" key={q[0]}><div><b>{q[0]}</b> · {q[1]}</div><span>{q[2]}</span></div>
+        ))}
+      </div>
+
+      <footer>
+        Built with the Lekhnath Top-20 project · Repo:{" "}
+        <a href={REPO} target="_blank" rel="noreferrer">TIWARIANKIT10/lekhnath-view-tower-demo</a>
+        {" "}· Each new hotel gets added here as its branch is finished.
+      </footer>
+    </div>
   );
 }

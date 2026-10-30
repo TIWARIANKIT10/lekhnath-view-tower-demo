@@ -1,33 +1,41 @@
-# Hotel Lekhnath View Tower & Eco Farm — Concept Demo
+# Lekhnath Hotel Websites — Portfolio (main branch)
 
-A modern, mobile-first Next.js demo built to pitch this hotel on a
-Google Business Profile + direct-booking webpage package.
+This repo holds **every hotel website** built for Ankit's hotel
+Google-Profile + webpage business in Lekhnath / Pokhara, Nepal.
 
-## Run it
-```bash
-npm install
-npm run dev     # http://localhost:3000
-npm run build   # production build
-```
+## How this repo is organised
 
-## What's inside
-- **Next.js 14 (App Router) + TypeScript + Tailwind CSS**
-- Routes: `/` home, `/rooms`, `/gallery`, `/book`, `/contact`
-- Booking = WhatsApp deep link with room/dates/guests pre-filled
-  (no payment system — hotels this size confirm on WhatsApp)
-- Sticky mobile bar: Call · WhatsApp · Book — the 3 actions that matter
-- Hotel JSON-LD schema, SEO metadata, responsive images via next/image
+- **`main` (this branch) = ONLY the portfolio listing website** — the
+  index page you are reading about, live at the project's Vercel
+  production URL. It links to every hotel site.
+- **Every hotel has its own branch** named `hotel/<slug>`, containing
+  that hotel's complete Next.js website plus a README with the
+  hotel's verified facts and a full owner-approach pitch.
 
-## Before going live (confirm with the hotel)
-- [ ] Real room names, photos and rates (current rates are demo, from OTA listings)
-- [ ] Official email address (config placeholder)
-- [ ] Rupa Lake walking distance / exact distances
-- [ ] Replace placeholder gallery photos with real hotel photos
-- [ ] Point the Google Business Profile website link here
+## Branch map
 
-Edit everything about the hotel in **one file**: `lib/config.ts`.
-Content (rooms, reviews, gallery) lives in `data/content.ts`.
+| Branch | Hotel |
+|---|---|
+| `hotel/lekhnath-view-tower` | Hotel Lekhnath View Tower & Eco Farm (Demo #0) |
+| `design-v2` | View Tower — Enhanced Edition (Framer Motion + Three.js) |
+| `hotel/grand-hotel-begnas` | #1 Grand Hotel Begnas |
+| `hotel/hotel-seven-lake-paradise` | #2 Hotel Seven Lake Paradise |
+| `hotel/seven-lakes-resort` | #3 Seven Lakes Resort |
+| `hotel/hotel-youngs-stupa` | #4 Hotel Young's Stupa |
+| `hotel/begnas-lake-front-guest-house` | #5 Begnas Lake Front Guest House |
+| `hotel/robins-nest` | #6 Robin's Nest Hotel & Restaurant |
+| `hotel/rupakot-resort` | #7 Rupakot Resort |
+| *(next)* | #8 The Begnas Lake Resort & Villas … through #20 Tiger Mountain Pokhara Lodge, strictly one by one |
 
-Real details used: phone +977 985-6052139 and 4.8★ Google rating
-from public Google listings — the hotel's old site showed a
-placeholder number (+977-9800000000), which this demo fixes.
+## Adding a hotel (the standing workflow)
+
+1. Research the hotel's real facts (phone, rooms, ratings, prices).
+2. Build a distinct-design Next.js site (Framer Motion + Three.js,
+   provider-based Booking.com integration + direct WhatsApp/call).
+3. Typecheck, production build, local smoke test.
+4. Push to branch `hotel/<slug>`; verify the commit on GitHub.
+5. Add its card to `app/page.tsx` here on `main` and push `main`.
+
+Stack for the listing site: Next.js 14 · TypeScript · plain CSS.
+Each hotel branch: Next.js 14 · TypeScript · Tailwind · Framer
+Motion · Three.js.
