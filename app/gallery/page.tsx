@@ -6,18 +6,22 @@ export const metadata: Metadata = { title: "Gallery — Grand Hotel Begnas" };
 
 export default function GalleryPage() {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-16 pt-32 sm:px-6">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-500">Gallery</p>
-      <h1 className="mt-1 font-display text-4xl font-semibold">The view sells itself</h1>
-      <div className="mt-8 columns-2 gap-3 md:columns-3 [&>figure]:mb-3">
+    <section className="wrap pb-20 pt-32 md:pt-40">
+      <p className="over">Gallery</p>
+      <h1 className="mt-3 font-display text-[40px] font-medium leading-tight md:text-5xl">The view sells itself</h1>
+      <div className="mt-10 columns-2 gap-4 md:columns-3 [&>figure]:mb-7">
         {gallery.map((g, i) => (
-          <figure key={g.label} className="relative overflow-hidden rounded-2xl">
-            <Image src={g.img} alt={g.label} width={800} height={i % 2 ? 1000 : 640} className="w-full object-cover" />
-            <figcaption className="absolute bottom-2 left-2 rounded-full bg-pine-950/75 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">{g.label}</figcaption>
+          <figure key={g.label} className="break-inside-avoid">
+            <div className="relative overflow-hidden">
+              <Image src={g.img} alt={g.label} width={800} height={i % 2 ? 1000 : 640} className="w-full object-cover" />
+            </div>
+            <figcaption className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-ink-soft">{g.label}</figcaption>
           </figure>
         ))}
       </div>
-      <p className="mt-6 text-xs text-pine-700/60">Demo photos are placeholders — the live site will use the hotel’s real photos, shot on location.</p>
+      <p className="mt-4 text-xs text-ink-soft">
+        Placeholder photographs — the live site will carry the hotel's own photography, shot on location.
+      </p>
     </section>
   );
 }

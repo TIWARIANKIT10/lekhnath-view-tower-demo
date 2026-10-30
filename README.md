@@ -4,10 +4,16 @@
 `hotel-profile-business/Lekhnath-Top20-Prospects.md` in the business workspace).
 Branch: `hotel/grand-hotel-begnas` in TIWARIANKIT10/lekhnath-view-tower-demo.
 
-A premium, mobile-first Next.js 14 site built specifically for this hotel —
-not a copy of the Lekhnath View Tower demo. Design variant: **"Grand Lakeside
-Classic"** — deep navy + gold, centered serif hero, Three.js cool lake-light
-sparkles, Framer Motion reveals/parallax throughout. Fully responsive.
+A premium, mobile-first Next.js 14 site built specifically for this hotel.
+Design: **"Grand Editorial"** — a bespoke build (2026-10-30 redesign,
+replacing the first version, which shared a template with the other hotel
+sites): ivory paper, ink navy and brass; Playfair Display + Manrope;
+a centred GRAND masthead with split navigation, a still crossfade hero,
+numbered editorial sections (01 Stay · 02 At the Grand · 03 The Guest Book ·
+04 Reservations), rooms as alternating editorial spreads, a colophon
+footer. No Three.js, no shared components with any other hotel site.
+Fully responsive; booking = call-direct (landline only) + Booking.com
+partner deep links from lib/booking.ts.
 
 ## About this hotel (verified 2026-10-30 from OTA/Places listings)
 

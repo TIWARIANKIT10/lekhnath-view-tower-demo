@@ -1,43 +1,58 @@
-"use client";
-// Room card v2: Framer Motion lift + image zoom on hover, dual booking CTAs.
+// RoomRow — an editorial spread, not a card: photograph on one side,
+// ruled text on the other, alternating down the page.
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { BedDouble, Users } from "lucide-react";
 import type { Room } from "@/data/content";
-import { bookingComLink } from "@/lib/config";
 
-export default function RoomCard({ room }: { room: Room }) {
+export default function RoomCard({ room, flip = false }: { room: Room; flip?: boolean }) {
   return (
-    <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group overflow-hidden rounded-3xl bg-white shadow-card hover:shadow-soft">
-      <Link href="/rooms" className="relative block aspect-[4/3] overflow-hidden">
-        <Image src={room.img} alt={room.name} fill sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition duration-700 group-hover:scale-110" />
-        <div className="absolute inset-0 bg-gradient-to-t from-pine-950/35 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
-        {room.tag && <span className="absolute left-3 top-3 rounded-full bg-sand-500 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">{room.tag}</span>}
-        <span className="absolute bottom-3 right-3 rounded-full bg-pine-950/80 px-3 py-1.5 text-sm font-bold text-white backdrop-blur">from ${room.price}<span className="text-xs font-medium text-white/70"> /night</span></span>
-      </Link>
-      <div className="p-4 sm:p-5">
-        <h3 className="font-display text-xl font-semibold text-pine-950">{room.name}</h3>
-        <p className="mt-0.5 text-sm text-pine-700/80">{room.line}</p>
-        <div className="mt-3 flex gap-4 text-[13px] font-medium text-pine-800">
-          <span className="flex items-center gap-1.5"><BedDouble size={15} /> {room.bed}</span>
-          <span className="flex items-center gap-1.5"><Users size={15} /> {room.guests} guests</span>
+    <article className={`grid items-center gap-6 md:grid-cols-12 md:gap-10 ${flip ? "" : ""}`}>
+      <div className={`relative aspect-[4/3] overflow-hidden md:col-span-7 ${flip ? "md:order-2" : ""}`}>
+        <Image
+          src={room.img}
+          alt={room.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 58vw"
+          className="object-cover"
+        />
+        {room.tag && (
+          <span className="absolute left-4 top-4 bg-paper px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-ink">
+            {room.tag}
+          </span>
+        )}
+      </div>
+      <div className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}>
+        <h3 className="font-display text-[28px] font-medium leading-snug md:text-[32px]">{room.name}</h3>
+        <p className="mt-2 text-[15px] italic leading-relaxed text-ink-soft" style={{ fontFamily: "var(--font-display)" }}>
+          {room.line}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 text-[13px] font-semibold text-ink">
+          <span className="flex items-center gap-1.5">
+            <BedDouble size={15} className="text-brass" /> {room.bed}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Users size={15} className="text-brass" /> Sleeps {room.guests}
+          </span>
         </div>
-        <div className="mt-4 grid grid-cols-[1fr_auto] gap-2">
-          <Link href={`/book?room=${encodeURIComponent(room.name)}`}
-            className="rounded-xl bg-pine-900 py-3 text-center text-sm font-bold text-white transition hover:bg-pine-800">
-            Book direct
+        <ul className="mt-4 space-y-1.5 border-t border-line pt-4 text-sm text-ink-soft">
+          {room.perks.map((p) => (
+            <li key={p} className="flex items-center gap-2.5">
+              <span className="h-1 w-1 rounded-full bg-brass" /> {p}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6 flex items-end justify-between border-t border-line pt-4">
+          <p>
+            <span className="text-xs uppercase tracking-[0.18em] text-ink-soft">From</span>
+            <span className="ml-2 font-display text-3xl font-semibold">${room.price}</span>
+            <span className="text-sm text-ink-soft"> / night</span>
+          </p>
+          <Link href={`/book?room=${room.slug}`} className="text-sm font-bold uppercase tracking-[0.14em] text-brass underline-offset-4 hover:underline">
+            Reserve →
           </Link>
-          <a href={bookingComLink()} target="_blank" rel="noreferrer"
-            className="rounded-xl bg-[#003580]/10 px-3.5 py-3 text-center text-sm font-bold text-[#003580] transition hover:bg-[#003580]/15">
-            Booking.com
-          </a>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

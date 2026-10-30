@@ -1,91 +1,65 @@
 "use client";
-// Hero v2: Ken Burns slideshow + Three.js firefly atmosphere + Framer Motion
-// staggered headline and scroll parallax.
-import { useEffect, useRef, useState } from "react";
+// Hero — a still, print-like opening: one slow crossfade, a centred
+// serif headline, a brass rule. No particles, no motion tricks.
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { heroImages } from "@/data/content";
 import { hotel } from "@/lib/config";
 
-const ThreeHero = dynamic(() => import("@/components/ThreeHero"), { ssr: false });
-
-const ease = [0.22, 1, 0.36, 1] as const;
-const parent = { hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } } };
-const item = { hidden: { opacity: 0, y: 34 }, show: { opacity: 1, y: 0, transition: { duration: 0.85, ease } } };
-
 export default function Hero() {
   const [i, setI] = useState(0);
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-
   useEffect(() => {
-    if (reduce) return;
-    const t = setInterval(() => setI((v) => (v + 1) % heroImages.length), 5500);
+    const t = setInterval(() => setI((v) => (v + 1) % heroImages.length), 6000);
     return () => clearInterval(t);
-  }, [reduce]);
+  }, []);
 
   return (
-    <section ref={ref} className="relative flex min-h-[94svh] items-end overflow-hidden bg-pine-950">
-      <motion.div style={reduce ? undefined : { y: imgY }} className="absolute inset-0 -bottom-[20%]">
-        {heroImages.map((src, idx) => (
-          <motion.div key={src} className="absolute inset-0"
-            initial={false}
-            animate={{ opacity: idx === i ? 1 : 0, scale: idx === i ? 1 : 1.06 }}
-            transition={{ opacity: { duration: 1.6 }, scale: { duration: 7, ease: "linear" } }}>
-            <Image src={src} alt="Begnas Lake and Annapurna views near Grand Hotel Begnas"
-              fill priority={idx === 0} sizes="100vw" className="object-cover" />
-          </motion.div>
-        ))}
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-pine-950/90 via-pine-950/20 to-pine-950/40" />
-      <ThreeHero />
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-ink-deep">
+      {heroImages.map((src, idx) => (
+        <div key={src} className={`absolute inset-0 transition-opacity duration-[2200ms] ${idx === i ? "opacity-100" : "opacity-0"}`}>
+          <Image src={src} alt="Begnas Lake and the Annapurna range" fill priority={idx === 0} sizes="100vw" className="object-cover" />
+        </div>
+      ))}
+      <div className="absolute inset-0 bg-ink-deep/45" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-deep/70 to-transparent" />
 
-      <motion.div style={reduce ? undefined : { opacity: fade }}
-        className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-28 pt-32 text-center sm:px-6 md:pb-20">
-        <motion.div variants={parent} initial="hidden" animate="show">
-          <motion.div variants={item} className="mb-4 flex flex-wrap justify-center gap-2">
-            <span className="flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
-              <Star size={13} className="fill-sand-400 text-sand-400" /> {hotel.otaScore} · Expedia
-            </span>
-            <span className="rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">On Booking.com & all major OTAs</span>
-          </motion.div>
-          <motion.h1 variants={item} className="mx-auto max-w-3xl font-display text-[44px] font-semibold leading-[1.03] text-white sm:text-7xl">
-            Steps from the lake.<br />
-            <span className="bg-gradient-to-r from-sand-300 via-sand-400 to-sand-300 bg-clip-text text-transparent">Grand in every way.</span>
-          </motion.h1>
-          <motion.p variants={item} className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/85 sm:text-base">
-            A classic lakeside hotel on Begnas Sadak — restaurant, bar and mountain views, two minutes from the water.
-          </motion.p>
-          <motion.div variants={item} className="mt-7 flex flex-wrap justify-center gap-3">
-            <motion.span whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/book" className="block rounded-full bg-sand-500 px-7 py-3.5 text-[15px] font-bold text-white shadow-soft">Book direct — best rate</Link>
-            </motion.span>
-            <motion.span whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/rooms" className="block rounded-full bg-white/15 px-7 py-3.5 text-[15px] font-semibold text-white backdrop-blur">See rooms</Link>
-            </motion.span>
-          </motion.div>
-          <motion.div variants={item} className="mt-8 flex items-center justify-center gap-4">
-            <div className="flex gap-1.5">
-              {heroImages.map((_, idx) => (
-                <button key={idx} aria-label={`Photo ${idx + 1}`} onClick={() => setI(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${idx === i ? "w-8 bg-sand-400" : "w-2.5 bg-white/40"}`} />
-              ))}
-            </div>
-            {!reduce && (
-              <motion.span animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-                className="flex items-center gap-1 text-xs font-semibold text-white/70">
-                <ChevronDown size={14} /> Scroll
-              </motion.span>
-            )}
-          </motion.div>
-        </motion.div>
-      </motion.div>
+      <div className="relative z-10 px-5 pt-24 text-center text-white">
+        <p className="text-[11px] font-bold uppercase tracking-mega text-brass-pale">Begnas Sadak — Lekhnath, Pokhara</p>
+        <h1 className="mx-auto mt-6 max-w-3xl font-display text-[42px] font-medium leading-[1.08] sm:text-6xl md:text-7xl">
+          The quiet side
+          <br />
+          <em className="font-medium">of Pokhara.</em>
+        </h1>
+        <div className="mx-auto mt-7 h-px w-24 bg-brass" />
+        <p className="mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-white/85">
+          Two hundred steps from Begnas Lake. Thirteen calm rooms, a good table, and the mountains on the horizon.
+        </p>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <Link href="/book" className="btn-brass">
+            Reserve your stay
+          </Link>
+          <Link href="/rooms" className="btn-ghost">
+            View the rooms
+          </Link>
+        </div>
+        <p className="mt-9 flex items-center justify-center gap-2 text-[13px] font-semibold text-white/80">
+          <Star size={14} className="fill-brass-light text-brass-light" />
+          {hotel.otaScore} — {hotel.otaLabel}
+        </p>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">
+        {heroImages.map((_, idx) => (
+          <button
+            key={idx}
+            aria-label={`Photograph ${idx + 1}`}
+            onClick={() => setI(idx)}
+            className={`h-[3px] transition-all duration-500 ${idx === i ? "w-10 bg-brass-light" : "w-5 bg-white/40"}`}
+          />
+        ))}
+      </div>
     </section>
   );
 }

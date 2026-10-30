@@ -1,31 +1,26 @@
 "use client";
+// Quiet ivory bar, mobile only: Call | Reserve, split by a hairline.
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
-import { hotel, directLink, bookingComLink } from "@/lib/config";
+import { Phone } from "lucide-react";
+import { hotel } from "@/lib/config";
 
 export default function StickyBar() {
   return (
-    <motion.div
-      initial={{ y: 80 }} animate={{ y: 0 }} transition={{ delay: 0.6, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-pine-100 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_-12px_rgb(12_31_26/0.3)] backdrop-blur md:hidden">
-      <div className="grid grid-cols-3">
-        <a href={`tel:${hotel.phone}`} className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold text-pine-900 active:bg-pine-50">
-          <Phone size={20} /> Call
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
+      <div className="grid grid-cols-2">
+        <a
+          href={`tel:${hotel.phone}`}
+          className="flex items-center justify-center gap-2 py-3.5 text-sm font-bold text-ink active:bg-cream"
+        >
+          <Phone size={17} className="text-brass" /> Call the hotel
         </a>
-        {hotel.whatsapp ? (
-          <a href={directLink()} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold text-[#1FA855] active:bg-pine-50">
-            <MessageCircle size={20} /> WhatsApp
-          </a>
-        ) : (
-          <a href={bookingComLink()} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold text-[#003580] active:bg-pine-50">
-            <CalendarCheck size={20} /> Booking.com
-          </a>
-        )}
-        <Link href="/book" className="m-1.5 ml-0 flex items-center justify-center rounded-xl bg-pine-900 text-sm font-bold text-white active:bg-pine-800">
-          Book now
+        <Link
+          href="/book"
+          className="flex items-center justify-center bg-brass py-3.5 text-sm font-bold text-white active:bg-brass-light"
+        >
+          Reserve
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

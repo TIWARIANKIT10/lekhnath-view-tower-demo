@@ -1,20 +1,26 @@
 import type { Config } from "tailwindcss";
+
+// Grand Hotel Begnas — "Grand Editorial" design system.
+// Ivory paper, deep ink navy, brass. Playfair Display + Manrope.
+// Deliberately unlike any other hotel site in the collection.
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./data/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        pine: { 950: "#081426", 900: "#0B1F3A", 800: "#123058", 700: "#1B4480", 100: "#D8E2F0", 50: "#EFF4FA" },
-        sand: { 500: "#C8A24B", 400: "#DDBC72", 300: "#EAD9A8", 100: "#F4ECD7" },
-        cream: "#FAF8F3"
+        ink: { DEFAULT: "#182642", deep: "#0F1930", soft: "#43536F" },
+        brass: { DEFAULT: "#A87F3D", light: "#C6A15B", pale: "#E9DCC0" },
+        paper: "#FAF6EE",
+        cream: "#F3ECDC",
+        line: "#E3D9C4",
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"]
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
-      boxShadow: { soft: "0 20px 50px -20px rgb(8 20 38 / 0.35)", card: "0 10px 30px -12px rgb(8 20 38 / 0.25)" }
-    }
+      letterSpacing: { mega: "0.35em" },
+    },
   },
-  plugins: []
+  plugins: [],
 };
 export default config;

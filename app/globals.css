@@ -2,20 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-html { scroll-behavior: smooth; }
-body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-::selection { background: #C99B5F; color: #fff; }
-
-/* v2 polish: soft grain-free gradient sheen for dark sections */
-.sheen { position: relative; }
-.sheen::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(60% 40% at 20% 0%, rgb(201 155 95 / 0.14), transparent 70%);
+html {
+  scroll-behavior: smooth;
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { scrollbar-width: none; }
+body {
+  background: #faf6ee;
+  color: #182642;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #a87f3d;
+  color: #fff;
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-6xl px-5 md:px-10;
+  }
+  .over {
+    @apply text-[11px] font-semibold uppercase tracking-mega text-brass;
+  }
+  .btn-brass {
+    @apply inline-flex items-center justify-center gap-2 bg-brass px-6 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-brass-light;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-white/60 px-6 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10;
+  }
+  .btn-ink {
+    @apply inline-flex items-center justify-center gap-2 border border-ink px-6 py-3 text-sm font-semibold tracking-wide text-ink transition hover:bg-ink hover:text-paper;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }

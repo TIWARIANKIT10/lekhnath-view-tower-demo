@@ -1,33 +1,49 @@
 import type { Metadata } from "next";
-import { MapPin, MessageCircle, Phone, Mail, Clock } from "lucide-react";
-import { hotel, waLink, bookMessage } from "@/lib/config";
+import { hotel } from "@/lib/config";
+import { distances } from "@/data/content";
 
 export const metadata: Metadata = { title: "Contact — Grand Hotel Begnas" };
 
 export default function ContactPage() {
-  const rows = [
-    { icon: Phone, label: "Call us", value: hotel.phoneDisplay, href: `tel:${hotel.phone}` },
-    ...(hotel.whatsapp ? [{ icon: MessageCircle, label: "WhatsApp", value: "Chat now — fastest reply", href: waLink(bookMessage()) }] : []),
-    ...(hotel.email ? [{ icon: Mail, label: "Email", value: hotel.email, href: `mailto:${hotel.email}` }] : []),
-    { icon: MapPin, label: "Address", value: hotel.address, href: hotel.mapsUrl },
-    { icon: Clock, label: "Check-in", value: `From ${hotel.checkIn} · check-out ${hotel.checkOut}`, href: undefined },
-  ];
   return (
-    <section className="mx-auto max-w-3xl px-4 pb-20 pt-32 sm:px-6">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-500">Contact</p>
-      <h1 className="mt-1 font-display text-4xl font-semibold">Talk to the hotel</h1>
-      <p className="mt-2 text-[15px] text-pine-700/85">One call and you're talking to the hotel directly — no booking site in the middle.</p>
-      <div className="mt-7 space-y-3">
-        {rows.map((r) => {
-          const inner = (
-            <div className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-card sm:p-5">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pine-50 text-pine-900"><r.icon size={20} /></span>
-              <span><span className="block text-xs font-bold uppercase tracking-wider text-pine-700/60">{r.label}</span>
-              <span className="block font-semibold text-pine-950">{r.value}</span></span>
-            </div>
-          );
-          return r.href ? <a key={r.label} href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="block active:scale-[0.99]">{inner}</a> : <div key={r.label}>{inner}</div>;
-        })}
+    <section className="wrap max-w-3xl pb-20 pt-32 md:pt-40">
+      <p className="over">Contact</p>
+      <h1 className="mt-3 font-display text-[40px] font-medium leading-tight md:text-5xl">Talk to the hotel</h1>
+      <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft">
+        No call centre, no booking site in the middle — one number reaches the front desk.
+      </p>
+
+      <a href={`tel:${hotel.phone}`} className="mt-9 block border-b-2 border-ink pb-6">
+        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">Telephone</span>
+        <span className="mt-2 block font-display text-4xl font-semibold sm:text-5xl">{hotel.phoneDisplay}</span>
+      </a>
+
+      <div className="border-b border-line py-6">
+        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">Address</span>
+        <p className="mt-2 text-lg">{hotel.address}</p>
+        <a href={hotel.mapsUrl} target="_blank" rel="noreferrer" className="btn-ink mt-4">
+          Open in Google Maps
+        </a>
+      </div>
+
+      <div className="border-b border-line py-6">
+        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">Hours</span>
+        <p className="mt-2 text-lg">
+          Check-in from {hotel.checkIn} · Check-out until {hotel.checkOut}
+        </p>
+      </div>
+
+      <div className="py-6">
+        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">Distances</span>
+        <ul className="mt-3">
+          {distances.map((d) => (
+            <li key={d.place} className="flex items-baseline gap-3 py-2 text-[15px]">
+              <span>{d.place}</span>
+              <span className="flex-1 border-b border-dotted border-brass/50" />
+              <span className="font-bold">{d.time}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

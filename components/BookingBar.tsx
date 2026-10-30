@@ -1,67 +1,96 @@
 "use client";
-// Booking v2: one set of dates/guests, two ways to book —
-//  1) Book direct (best rate, no commission — call or WhatsApp)
-//  2) Book on Booking.com (deep link carrying the same dates/guests)
-import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, BadgeCheck } from "lucide-react";
-import { directLink, bookingComLink, hotel } from "@/lib/config";
+// The reservation form — set dates and party once, then either call the
+// hotel direct (best rate, no commission) or continue to Booking.com
+// with the same details attached.
+import { useEffect, useMemo, useState } from "react";
+import { Phone } from "lucide-react";
+import { bookingComUrl, callUrl, defaultStay, type StayQuery } from "@/lib/booking";
+import { hotel } from "@/lib/config";
 import { rooms } from "@/data/content";
 
-const today = () => new Date().toISOString().slice(0, 10);
-const plus = (d: number) => new Date(Date.now() + d * 864e5).toISOString().slice(0, 10);
-
 export default function BookingBar({ defaultRoom = "" }: { defaultRoom?: string }) {
-  const [room, setRoom] = useState(defaultRoom);
-  const [ci, setCi] = useState(today());
-  const [co, setCo] = useState(plus(1));
-  const [guests, setGuests] = useState("2");
+  const [stay, setStay] = useState<StayQuery>(defaultStay);
+  const [roomSlug, setRoomSlug] = useState(defaultRoom);
+  useEffect(() => {
+    if (defaultRoom) setRoomSlug(defaultRoom);
+  }, [defaultRoom]);
+
   const nights = useMemo(() => {
-    const n = Math.round((new Date(co).getTime() - new Date(ci).getTime()) / 864e5);
+    const n = Math.round((new Date(stay.checkOut).getTime() - new Date(stay.checkIn).getTime()) / 864e5);
     return Number.isFinite(n) && n > 0 ? n : 0;
-  }, [ci, co]);
-  const sel = rooms.find((r) => r.name === room);
-  const total = sel && nights ? sel.price * nights : null;
+  }, [stay]);
+  const room = rooms.find((r) => r.slug === roomSlug);
+  const total = room && nights ? room.price * nights : null;
 
-  const field = "w-full rounded-xl border border-pine-100 bg-white px-3 py-3 text-[15px] text-pine-950 outline-none transition focus:border-sand-500 focus:ring-2 focus:ring-sand-500/25";
-  const label = "mb-1 block text-[11px] font-bold uppercase tracking-wider text-pine-700/70";
+  const field =
+    "w-full border border-line bg-white px-3 py-3 text-[15px] text-ink outline-none transition focus:border-brass";
+  const label = "mb-1.5 block text-[10px] font-bold uppercase tracking-[0.2em] text-ink-soft";
+  const set = (k: keyof StayQuery) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    setStay((s) => ({ ...s, [k]: k === "checkIn" || k === "checkOut" ? e.target.value : Number(e.target.value) }));
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-3xl bg-white/95 p-4 shadow-soft ring-1 ring-pine-950/5 backdrop-blur sm:p-5">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div><label className={label}>Room</label>
-          <select className={field} value={room} onChange={(e) => setRoom(e.target.value)}>
+    <div className="border border-line bg-white p-5 sm:p-7">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="lg:col-span-1">
+          <label className={label}>Room</label>
+          <select className={field} value={roomSlug} onChange={(e) => setRoomSlug(e.target.value)}>
             <option value="">Any room</option>
-            {rooms.map((r) => <option key={r.slug} value={r.name}>{r.name}</option>)}
-          </select></div>
-        <div><label className={label}>Check-in</label>
-          <input type="date" className={field} value={ci} min={today()} onChange={(e) => setCi(e.target.value)} /></div>
-        <div><label className={label}>Check-out</label>
-          <input type="date" className={field} value={co} min={ci} onChange={(e) => setCo(e.target.value)} /></div>
-        <div><label className={label}>Guests</label>
-          <select className={field} value={guests} onChange={(e) => setGuests(e.target.value)}>
-            {[1, 2, 3, 4, 5, 6].map((g) => <option key={g} value={g}>{g}</option>)}
-          </select></div>
+            {rooms.map((r) => (
+              <option key={r.slug} value={r.slug}>
+                {r.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className={label}>Check-in</label>
+          <input type="date" className={field} value={stay.checkIn} onChange={set("checkIn")} />
+        </div>
+        <div>
+          <label className={label}>Check-out</label>
+          <input type="date" className={field} value={stay.checkOut} min={stay.checkIn} onChange={set("checkOut")} />
+        </div>
+        <div>
+          <label className={label}>Adults</label>
+          <select className={field} value={stay.adults} onChange={set("adults")}>
+            {[1, 2, 3, 4, 5, 6].map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className={label}>Rooms</label>
+          <select className={field} value={stay.rooms} onChange={set("rooms")}>
+            {[1, 2, 3, 4].map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-2.5 sm:flex-row">
-        <motion.a whileTap={{ scale: 0.98 }} {...(hotel.whatsapp ? { target: "_blank", rel: "noreferrer" } : {})}
-          href={directLink(ci, co, guests)}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-pine-900 px-5 py-3.5 font-bold text-white shadow-card">
-          {total ? `$${total} · Book direct` : "Book direct"} <ArrowRight size={17} />
-        </motion.a>
-        <motion.a whileTap={{ scale: 0.98 }} target="_blank" rel="noreferrer"
-          href={bookingComLink(ci, co, guests)}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#003580] px-5 py-3.5 font-bold text-white shadow-card">
-          Book on Booking.com
-        </motion.a>
+      {total && (
+        <p className="mt-4 text-sm text-ink-soft">
+          {room!.name} · {nights} night{nights > 1 ? "s" : ""} · indicative total{" "}
+          <span className="font-display text-lg font-semibold text-ink">${total}</span> — confirmed when you book.
+        </p>
+      )}
+
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <a href={callUrl} className="btn-brass w-full !py-4">
+          <Phone size={17} /> Call to book — {hotel.phoneDisplay}
+        </a>
+        <a href={bookingComUrl(stay)} target="_blank" rel="noreferrer" className="btn-ink w-full !py-4">
+          Continue to Booking.com
+        </a>
       </div>
-      <p className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-center text-xs text-pine-700/70 sm:justify-start">
-        <BadgeCheck size={14} className="text-sand-500" />
-        {nights ? `${nights} night${nights > 1 ? "s" : ""} · ` : ""}{hotel.whatsapp ? 'Best rate direct on WhatsApp — no commission.' : 'Best rate direct — call the hotel, no commission.'} Or book instantly on Booking.com with the same dates.
+      <p className="mt-4 text-center text-xs leading-relaxed text-ink-soft">
+        Booking direct by phone is always the best rate — no commission, pay at the hotel. Check-in {hotel.checkIn} ·
+        Check-out {hotel.checkOut}.
       </p>
-    </motion.div>
+    </div>
   );
 }

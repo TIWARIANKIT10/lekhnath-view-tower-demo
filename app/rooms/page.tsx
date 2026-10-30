@@ -7,21 +7,24 @@ export const metadata: Metadata = { title: "Rooms — Grand Hotel Begnas" };
 
 export default function RoomsPage() {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-16 pt-32 sm:px-6">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand-500">Stay</p>
-      <h1 className="mt-1 font-display text-4xl font-semibold">Rooms</h1>
-      <p className="mt-2 max-w-md text-[15px] text-pine-700/85">Thirteen rooms, steps from the lake. Prices shown are direct — book direct and skip the OTA commission.</p>
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {rooms.map((r) => (
+    <section className="wrap pb-20 pt-32 md:pt-40">
+      <p className="over">01 — Stay</p>
+      <h1 className="mt-3 font-display text-[40px] font-medium leading-tight md:text-5xl">The rooms</h1>
+      <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft">
+        Thirteen rooms above Begnas Sadak. Rates shown are the hotel's public listing rates — booking direct by phone
+        is always the best price.
+      </p>
+      <div className="mt-12 space-y-14 md:space-y-20">
+        {rooms.map((r, i) => (
           <Reveal key={r.slug}>
-            <RoomCard room={r} />
-            <ul className="flex flex-wrap gap-1.5 px-1 pt-3">
-              {r.perks.map((p) => <li key={p} className="rounded-full bg-pine-50 px-2.5 py-1 text-xs font-medium text-pine-800">{p}</li>)}
-            </ul>
+            <RoomCard room={r} flip={i % 2 === 1} />
           </Reveal>
         ))}
       </div>
-      <p className="mt-8 text-xs text-pine-700/60">Demo rates based on current OTA listings — to be confirmed with the hotel.</p>
+      <p className="mt-14 border-t border-line pt-5 text-xs leading-relaxed text-ink-soft">
+        Indicative rates drawn from the hotel's Expedia / Klook / momondo listings on 2026-10-30 — to be confirmed with
+        the hotel.
+      </p>
     </section>
   );
 }
