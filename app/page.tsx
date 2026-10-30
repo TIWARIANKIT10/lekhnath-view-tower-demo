@@ -44,10 +44,13 @@ const sites: Site[] = [
     pitch: "A proven 4-star resort (8.7 across 2,469 ratings) whose site undersells it.",
     chips: ["WhatsApp booking", "Trivago 8.7 · 2,469", "Charcoal / copper design"], colors: ["#171310", "#a9713b"],
     site: PREV("hotel/rupakot-resort"), code: REPO + "/tree/hotel/rupakot-resort" },
+  { n: "Hotel #8", name: "The Begnas Lake Resort & Villas", area: "Sundari Danda · 38 rooms, cottages & suites", badge: "Redesign",
+    pitch: "The original Begnas resort — 9.9s for location and staff, a tired brochure website.",
+    chips: ["WhatsApp booking", "Kayak 9.0 · Wonderful", "Moss / apricot design"], colors: ["#131a12", "#d97d3e"],
+    site: PREV("hotel/begnas-lake-resort"), code: REPO + "/tree/hotel/begnas-lake-resort" },
 ];
 
 const queue: [string, string, string][] = [
-  ["#8", "The Begnas Lake Resort & Villas", "redesign tier"],
   ["#9", "Annapurna Royal Camp", "luxury camp"],
   ["#10", "Sanu Lake on de' Water", "lakeside"],
   ["#11", "Begnas Yoga & Retreat", "retreat niche"],
@@ -70,9 +73,9 @@ export default function Home() {
         <h1>Every hotel website,<br /><em>one front door.</em></h1>
         <p className="sub">This page is the main site now — the index of the whole Lekhnath Top-20 project. Open any hotel's website, jump to its code and owner-approach README, and see what's still in the queue.</p>
         <div className="stats">
-          <div className="stat"><b>9</b>sites ready</div>
-          <div className="stat"><b>7 / 20</b>prospects done</div>
-          <div className="stat"><b>13</b>in the queue</div>
+          <div className="stat"><b>10</b>sites ready</div>
+          <div className="stat"><b>8 / 20</b>prospects done</div>
+          <div className="stat"><b>12</b>in the queue</div>
           <div className="stat"><b>1</b>repo, one branch each</div>
         </div>
         <div className="bar"><i /></div>
