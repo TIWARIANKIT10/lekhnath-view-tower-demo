@@ -11,16 +11,15 @@ const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: `${hotel.name} ${hotel.suffix} — Lekhnath, Pokhara`,
-  description: "Family-run eco hotel in Lekhnath, Pokhara with a 360° view tower: Annapurna, Begnas & Rupa lakes. Book direct for the best rate.",
+  description: "3-star lakeside hotel steps from Begnas Lake in Lekhnath, Pokhara — private balconies, free breakfast, restaurant and bar. Book direct for the best rate.",
   openGraph: { title: `${hotel.name} ${hotel.suffix}`, description: hotel.tagline, type: "website" },
 };
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0C1F1A" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#04211D" };
 
 const jsonLd = {
   "@context": "https://schema.org", "@type": "Hotel",
-  name: `${hotel.name} and Eco Farm`, telephone: hotel.phone, address: hotel.address,
-  aggregateRating: { "@type": "AggregateRating", ratingValue: hotel.googleRating, reviewCount: hotel.googleReviews },
-  checkinTime: "12:00", checkoutTime: "12:00", priceRange: "$18–$32",
+  name: hotel.name, telephone: hotel.phone, address: hotel.address,
+  checkinTime: "12:00", checkoutTime: "12:00", priceRange: "$65–$110",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
