@@ -1,26 +1,30 @@
 "use client";
-// Quiet ivory bar, mobile only: Call | Reserve, split by a hairline.
+// Cheval Blanc's floating invitation replaces the app-style sticky bar:
+// a single white, sharp-cornered "Plan Your Escape" that drifts in after
+// the hero and rests near the end of the page.
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Phone } from "lucide-react";
-import { hotel } from "@/lib/config";
 
 export default function StickyBar() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const on = () => {
+      const y = window.scrollY;
+      const nearEnd = y > document.body.scrollHeight - window.innerHeight * 1.7;
+      setShow(y > window.innerHeight * 0.85 && !nearEnd);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
-      <div className="grid grid-cols-2">
-        <a
-          href={`tel:${hotel.phone}`}
-          className="flex items-center justify-center gap-2 py-3.5 text-sm font-bold text-ink active:bg-cream"
-        >
-          <Phone size={17} className="text-brass" /> Call the hotel
-        </a>
-        <Link
-          href="/book"
-          className="flex items-center justify-center bg-brass py-3.5 text-sm font-bold text-white active:bg-brass-light"
-        >
-          Reserve
-        </Link>
-      </div>
-    </div>
+    <Link
+      href="/book"
+      className={`fixed bottom-[calc(18px+env(safe-area-inset-bottom))] left-1/2 z-[65] -translate-x-1/2 whitespace-nowrap border border-line bg-white/95 px-[26px] py-3.5 text-[12.5px] font-normal uppercase tracking-[0.2em] text-ink shadow-[0_14px_34px_rgba(46,42,38,0.18)] backdrop-blur transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+        show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[90px] opacity-0"
+      }`}
+    >
+      Plan Your Escape
+    </Link>
   );
 }

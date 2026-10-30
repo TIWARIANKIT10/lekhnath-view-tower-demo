@@ -5,13 +5,15 @@ export const metadata: Metadata = { title: "Reservations — Grand Hotel Begnas"
 
 export default function BookPage() {
   return (
-    <section className="wrap max-w-3xl pb-20 pt-32 md:pt-40">
-      <p className="over">04 — Reservations</p>
-      <h1 className="mt-3 font-display text-[40px] font-medium leading-tight md:text-5xl">Book your stay</h1>
-      <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-soft">
-        Two ways, same dates: call the hotel direct for the best rate, or confirm instantly on Booking.com.
-      </p>
-      <div className="mt-9">
+    <section className="wrap max-w-3xl pb-24 pt-32 md:pt-44">
+      <div className="text-center">
+        <p className="eyebrow">Reservations</p>
+        <h1 className="mt-[18px] font-display text-[clamp(38px,7vw,56px)] font-normal leading-[1.1]">Book Your Stay</h1>
+        <p className="mx-auto mt-4 max-w-[32em] text-[15.5px] leading-[1.75] text-ink-soft">
+          Two ways, same dates: call the hotel direct for the best rate, or confirm instantly on Booking.com.
+        </p>
+      </div>
+      <div className="mt-12">
         <BookClient />
       </div>
     </section>

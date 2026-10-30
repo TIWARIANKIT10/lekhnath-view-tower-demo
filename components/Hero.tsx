@@ -1,64 +1,46 @@
 "use client";
-// Hero — a still, print-like opening: one slow crossfade, a centred
-// serif headline, a brass rule. No particles, no motion tricks.
+// Hero after Cheval Blanc: full-viewport imagery in a slow crossfade,
+// text resting at the bottom centre — a quiet overline, a large light
+// serif headline, and one white booking bar. Nothing else.
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { Star } from "lucide-react";
+import { HeroBar } from "@/components/BookingBar";
 import { heroImages } from "@/data/content";
-import { hotel } from "@/lib/config";
 
 export default function Hero() {
   const [i, setI] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % heroImages.length), 6000);
+    const t = setInterval(() => setI((v) => (v + 1) % heroImages.length), 7000);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-ink-deep">
+    <section className="relative flex h-[100svh] min-h-[560px] items-end justify-center overflow-hidden bg-[#3A362F]">
       {heroImages.map((src, idx) => (
-        <div key={src} className={`absolute inset-0 transition-opacity duration-[2200ms] ${idx === i ? "opacity-100" : "opacity-0"}`}>
-          <Image src={src} alt="Begnas Lake and the Annapurna range" fill priority={idx === 0} sizes="100vw" className="object-cover" />
+        <div key={src} className={`absolute inset-0 transition-opacity duration-[2400ms] ${idx === i ? "opacity-100" : "opacity-0"}`}>
+          <Image
+            src={src}
+            alt="Begnas Lake and the Annapurna range"
+            fill
+            priority={idx === 0}
+            sizes="100vw"
+            className={`object-cover transition-transform duration-[9000ms] ease-linear ${idx === i ? "scale-100" : "scale-[1.06]"}`}
+          />
         </div>
       ))}
-      <div className="absolute inset-0 bg-ink-deep/45" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-deep/70 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A16]/55 via-transparent to-[#1E1A16]/20" />
 
-      <div className="relative z-10 px-5 pt-24 text-center text-white">
-        <p className="text-[11px] font-bold uppercase tracking-mega text-brass-pale">Begnas Sadak — Lekhnath, Pokhara</p>
-        <h1 className="mx-auto mt-6 max-w-3xl font-display text-[42px] font-medium leading-[1.08] sm:text-6xl md:text-7xl">
-          The quiet side
+      <div className="relative z-10 w-full px-5 pb-[calc(30px+env(safe-area-inset-bottom))] text-center text-white">
+        <p className="text-[12.5px] font-light tracking-[0.06em]">A lakeside maison in Lekhnath, Pokhara</p>
+        <h1 className="mx-auto mt-3.5 max-w-[12em] font-display text-[clamp(40px,9.4vw,76px)] font-normal leading-[1.06]">
+          Plan Your Escape
           <br />
-          <em className="font-medium">of Pokhara.</em>
+          to the Lake
         </h1>
-        <div className="mx-auto mt-7 h-px w-24 bg-brass" />
-        <p className="mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-white/85">
-          Two hundred steps from Begnas Lake. Thirteen calm rooms, a good table, and the mountains on the horizon.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Link href="/book" className="btn-brass">
-            Reserve your stay
-          </Link>
-          <Link href="/rooms" className="btn-ghost">
-            View the rooms
-          </Link>
+        <div className="mt-6">
+          <HeroBar />
         </div>
-        <p className="mt-9 flex items-center justify-center gap-2 text-[13px] font-semibold text-white/80">
-          <Star size={14} className="fill-brass-light text-brass-light" />
-          {hotel.otaScore} — {hotel.otaLabel}
-        </p>
-      </div>
-
-      <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center gap-2">
-        {heroImages.map((_, idx) => (
-          <button
-            key={idx}
-            aria-label={`Photograph ${idx + 1}`}
-            onClick={() => setI(idx)}
-            className={`h-[3px] transition-all duration-500 ${idx === i ? "w-10 bg-brass-light" : "w-5 bg-white/40"}`}
-          />
-        ))}
+        <p className="mt-4 text-xs tracking-[0.05em] text-white/85">Book direct by telephone — the best rate, always.</p>
       </div>
     </section>
   );

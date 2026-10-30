@@ -1,24 +1,23 @@
 import type { Config } from "tailwindcss";
 
-// Grand Hotel Begnas — "Grand Editorial" design system.
-// Ivory paper, deep ink navy, brass. Playfair Display + Manrope.
-// Deliberately unlike any other hotel site in the collection.
+// Grand Hotel Begnas — design language after Cheval Blanc:
+// white and ivory, warm charcoal-brown ink, a single muted taupe.
+// Cormorant Garamond for emotion, Jost for information. Sharp corners.
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./data/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: { DEFAULT: "#182642", deep: "#0F1930", soft: "#43536F" },
-        brass: { DEFAULT: "#A87F3D", light: "#C6A15B", pale: "#E9DCC0" },
-        paper: "#FAF6EE",
-        cream: "#F3ECDC",
-        line: "#E3D9C4",
+        ink: { DEFAULT: "#2E2A26", soft: "#4C463F", mute: "#7C756B" },
+        taupe: { DEFAULT: "#5F574E", deep: "#4C463F" },
+        ivory: "#FAF8F4",
+        line: "#E7E1D8",
+        paper: "#FFFFFF",
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
-      letterSpacing: { mega: "0.35em" },
     },
   },
   plugins: [],

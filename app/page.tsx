@@ -1,182 +1,170 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Star } from "lucide-react";
 import Hero from "@/components/Hero";
-import BookingBar from "@/components/BookingBar";
 import RoomCard from "@/components/RoomCard";
 import Reveal from "@/components/Reveal";
-import { rooms, experiences, reviews, distances } from "@/data/content";
+import { rooms, experiences, distances } from "@/data/content";
 import { hotel } from "@/lib/config";
 
-function SectionHead({ no, title, href, linkLabel }: { no: string; title: string; href?: string; linkLabel?: string }) {
-  return (
-    <div className="flex items-end justify-between border-b-2 border-ink pb-4">
-      <h2 className="flex items-baseline gap-3 font-display text-[30px] font-medium leading-none md:text-4xl">
-        <span className="text-sm font-bold tracking-[0.2em] text-brass">{no}</span> {title}
-      </h2>
-      {href && (
-        <Link href={href} className="shrink-0 text-[13px] font-bold uppercase tracking-[0.14em] text-brass hover:underline underline-offset-4">
-          {linkLabel} →
-        </Link>
-      )}
-    </div>
-  );
-}
-
+// Home, in the maison rhythm: hero → a centred welcome → the rooms →
+// two quiet editorial spreads → one full-bleed moment → the guest book
+// → reservations. One idea per section; the white space does the work.
 export default function Home() {
+  const [lake, table] = experiences;
   return (
     <>
       <Hero />
 
-      {/* Welcome — an editorial spread, not a feature grid */}
-      <section className="wrap py-16 md:py-24">
-        <div className="grid gap-10 md:grid-cols-12">
-          <Reveal className="md:col-span-5">
-            <p className="over">Welcome</p>
-            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.12] md:text-[44px]">
-              A grand house
-              <br />
-              on a quiet lake.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1} className="md:col-span-7">
-            <p className="text-[17px] leading-relaxed text-ink-soft">
-              Grand Hotel Begnas stands on Begnas Sadak, close enough to the water that mornings begin with mist on the
-              lake and the Annapurnas turning gold. Inside: thirteen unhurried rooms, a restaurant and bar, and a staff
-              guests keep writing home about.
-            </p>
-            <p className="mt-4 text-[17px] leading-relaxed text-ink-soft">
-              It is the Pokhara of twenty years ago — no crowds, no noise — twenty minutes from the city.
-            </p>
-            <dl className="mt-9 grid grid-cols-3 divide-x divide-line border-y border-line py-5 text-center">
-              {[
-                ["13", "Guest rooms"],
-                ["200", "Steps to the lake"],
-                ["10/10", "Expedia rating"],
-              ].map(([n, l]) => (
-                <div key={l} className="px-2">
-                  <dt className="sr-only">{l}</dt>
-                  <dd className="font-display text-3xl font-semibold md:text-4xl">{n}</dd>
-                  <dd className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft">{l}</dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 01 — Stay */}
-      <section className="wrap pb-16 md:pb-24">
-        <Reveal>
-          <SectionHead no="01" title="Stay" href="/rooms" linkLabel="All rooms" />
+      {/* Welcome */}
+      <section className="px-5 py-24 md:py-[140px]">
+        <Reveal className="mx-auto max-w-[620px] text-center">
+          <h2 className="font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">
+            Step into the World
+            <br />
+            of Grand Begnas
+          </h2>
+          <p className="mt-5 text-[16.5px] leading-[1.75] text-ink-soft">
+            Two hundred steps from the still water of Begnas Lake, beneath the Annapurnas — a small, unhurried house of
+            thirteen rooms, a good table, and quiet mornings.
+          </p>
+          <a href="#lake" className="discover mt-[26px]">
+            Discover the Maison
+          </a>
         </Reveal>
-        <div className="mt-10 space-y-14 md:space-y-20">
-          {rooms.map((r, i) => (
-            <Reveal key={r.slug}>
-              <RoomCard room={r} flip={i % 2 === 1} />
-            </Reveal>
-          ))}
-        </div>
       </section>
 
-      {/* 02 — At the Grand */}
-      <section className="bg-cream py-16 md:py-24">
-        <div className="wrap">
-          <Reveal>
-            <SectionHead no="02" title="At the Grand" />
+      {/* The Rooms */}
+      <section id="rooms" className="bg-ivory px-5 py-24 md:py-[140px]">
+        <div className="wrap !px-0">
+          <Reveal className="text-center">
+            <p className="eyebrow">Stay</p>
+            <h2 className="mt-[18px] font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">Rooms by the Water</h2>
           </Reveal>
-          <div>
-            {experiences.map((e, i) => (
-              <Reveal key={e.title}>
-                <article className="grid items-center gap-5 border-b border-line py-8 md:grid-cols-12 md:gap-8">
-                  <span className="hidden font-display text-5xl font-medium text-brass/50 md:col-span-1 md:block">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="md:col-span-6">
-                    <h3 className="font-display text-2xl font-medium md:text-[28px]">{e.title}</h3>
-                    <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-ink-soft">{e.line}</p>
-                  </div>
-                  <div className="relative aspect-[16/9] overflow-hidden md:col-span-5">
-                    <Image src={e.img} alt={e.title} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
-                  </div>
-                </article>
+          <div className="mt-4">
+            {rooms.map((r) => (
+              <Reveal key={r.slug} className="mt-[74px]">
+                <RoomCard room={r} />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 03 — The guest book */}
-      <section className="wrap py-16 md:py-24">
-        <Reveal>
-          <SectionHead no="03" title="The guest book" />
-        </Reveal>
-        <Reveal>
-          <p className="mt-8 flex items-center gap-2 text-sm font-semibold text-ink-soft">
-            <Star size={16} className="fill-brass text-brass" /> {hotel.otaScore} · {hotel.otaLabel}
-          </p>
-        </Reveal>
-        <div className="mt-6 grid gap-10 md:grid-cols-3 md:gap-8">
-          {reviews.map((r, i) => (
-            <Reveal key={r.source} delay={i * 0.08}>
-              <figure className="border-t border-line pt-5">
-                <blockquote className="font-display text-[21px] font-medium italic leading-snug">{r.text}</blockquote>
-                <figcaption className="mt-4 text-[11px] font-bold uppercase tracking-[0.2em] text-brass">{r.source}</figcaption>
-              </figure>
-            </Reveal>
-          ))}
+      {/* The Lake */}
+      <section id="lake" className="px-5 py-24 md:py-[140px]">
+        <div className="wrap grid items-center gap-[34px] !px-0 md:grid-cols-2 md:gap-20">
+          <Reveal className="relative aspect-[3/3.8] overflow-hidden">
+            <Image src={lake.img} alt={lake.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="eyebrow">Experience quiet privacy</p>
+            <h2 className="mt-[18px] font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">
+              A Haven
+              <br />
+              of Serenity
+            </h2>
+            <p className="mt-5 max-w-[34em] text-[16.5px] leading-[1.75] text-ink-soft">
+              Begnas is the lake Pokhara forgot to crowd. Fishing boats at dawn, still water by noon, and the mountains
+              standing watch over all of it — your front garden, two hundred steps from the door.
+            </p>
+            <Link href="/book" className="discover mt-[26px]">
+              Plan Your Visit
+            </Link>
+          </Reveal>
         </div>
+      </section>
 
-        <Reveal className="mt-16">
-          <div className="grid gap-8 border border-line bg-white p-6 sm:p-9 md:grid-cols-2">
-            <div>
-              <p className="over">Find us</p>
-              <h3 className="mt-3 font-display text-3xl font-medium">Begnas Sadak, Lekhnath</h3>
-              <ul className="mt-6">
-                {distances.map((d) => (
-                  <li key={d.place} className="flex items-baseline gap-3 py-2.5 text-[15px]">
-                    <span>{d.place}</span>
-                    <span className="flex-1 border-b border-dotted border-brass/50" />
-                    <span className="font-bold">{d.time}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href={hotel.mapsUrl} target="_blank" rel="noreferrer" className="btn-ink mt-7">
-                Get directions
-              </a>
-            </div>
-            <div className="relative min-h-60 overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1400&auto=format&fit=crop"
-                alt="Begnas Lake"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
+      {/* The Table */}
+      <section className="px-5 pb-24 md:pb-[140px]">
+        <div className="wrap grid items-center gap-[34px] !px-0 md:grid-cols-2 md:gap-20">
+          <Reveal className="relative aspect-[3/3.8] overflow-hidden md:order-2">
+            <Image src={table.img} alt={table.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          </Reveal>
+          <Reveal delay={0.1} className="md:order-1">
+            <p className="eyebrow">Savour simple elegance</p>
+            <h2 className="mt-[18px] font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">
+              A Symphony
+              <br />
+              of Flavours
+            </h2>
+            <p className="mt-5 max-w-[34em] text-[16.5px] leading-[1.75] text-ink-soft">
+              A satisfying meal, a quiet drink at the bar, the light going down over the water. The day ends here — no
+              journey back into town required.
+            </p>
+            <p className="mt-4 max-w-[34em] text-[16.5px] leading-[1.75] text-ink-soft">
+              The house also keeps a meeting room and garden for family gatherings and small conferences.
+            </p>
+            <Link href="/book" className="discover mt-[26px]">
+              Reserve a Table
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* The Moment */}
+      <section className="relative flex h-[78svh] min-h-[440px] items-center justify-center overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2000&auto=format&fit=crop"
+          alt="The Annapurna panorama"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[#1E1A16]/30" />
+        <Reveal className="relative z-10 px-5 text-center text-white">
+          <p className="text-[13px] tracking-[0.04em] text-white/85">The Annapurnas</p>
+          <p className="mt-3 font-display text-[clamp(30px,6vw,48px)] font-normal leading-[1.15]">
+            Mountains on the horizon,
+            <br />
+            silence in between.
+          </p>
         </Reveal>
       </section>
 
-      {/* 04 — Reservations */}
-      <section className="bg-ink-deep py-16 text-white md:py-24">
-        <div className="wrap">
-          <Reveal>
-            <div className="flex items-end justify-between border-b-2 border-white pb-4">
-              <h2 className="flex items-baseline gap-3 font-display text-[30px] font-medium leading-none md:text-4xl">
-                <span className="text-sm font-bold tracking-[0.2em] text-brass-light">04</span> Reservations
-              </h2>
-              <a href={`tel:${hotel.phone}`} className="hidden items-center gap-2 text-sm font-bold sm:flex">
-                <Phone size={15} className="text-brass-light" /> {hotel.phoneDisplay}
-              </a>
-            </div>
-          </Reveal>
-          <Reveal className="mt-9">
-            <div className="text-ink">
-              <BookingBar />
-            </div>
-          </Reveal>
-        </div>
+      {/* The Guest Book */}
+      <section className="px-5 py-24 md:py-[140px]">
+        <Reveal className="mx-auto max-w-[760px] text-center">
+          <p className="eyebrow">The guest book</p>
+          <p className="mt-[18px] font-display text-[clamp(30px,6vw,46px)] font-normal leading-[1.25]">
+            “Exceptional — ten out of ten,
+            <br />
+            from verified guest stays.”
+          </p>
+          <p className="mt-[22px] text-xs uppercase tracking-[0.26em] text-ink-mute">
+            Expedia Guest Rating · Cleanliness 5/5 · Service 5/5 — Klook
+          </p>
+        </Reveal>
+      </section>
+
+      {/* Reservations */}
+      <section className="bg-ivory px-5 py-24 text-center md:py-[140px]">
+        <Reveal className="mx-auto max-w-[680px]">
+          <p className="eyebrow">Reservations</p>
+          <h2 className="mt-[18px] font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">Book Direct, Book Simply</h2>
+          <a href={`tel:${hotel.phone}`} className="mt-3.5 inline-block font-display text-[clamp(34px,7.4vw,54px)] font-medium leading-tight tracking-[0.02em]">
+            {hotel.phoneDisplay}
+          </a>
+          <p className="mx-auto mt-4 max-w-[30em] text-[15px] leading-[1.75] text-ink-soft">
+            One call to the front desk. No commission, no middleman — pay at the hotel. Prefer to book online? The same
+            rooms are on Booking.com.
+          </p>
+          <div className="mt-[34px] flex flex-wrap justify-center gap-3.5">
+            <a href={`tel:${hotel.phone}`} className="btn-taupe">
+              Call the Hotel
+            </a>
+            <Link href="/book" className="btn-line">
+              Book on Booking.com
+            </Link>
+          </div>
+          <p className="mt-11 text-[12.5px] uppercase tracking-[0.18em] text-ink-mute">
+            {distances.slice(0, 3).map((d, i) => (
+              <span key={d.place}>
+                {i > 0 && <span className="mx-2.5 opacity-50">·</span>}
+                {d.place} <b className="font-medium text-ink">{d.time}</b>
+              </span>
+            ))}
+          </p>
+        </Reveal>
       </section>
     </>
   );

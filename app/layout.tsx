@@ -1,32 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyBar from "@/components/StickyBar";
 import { hotel } from "@/lib/config";
 
-const display = Playfair_Display({
+const display = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
 });
-const sans = Manrope({ subsets: ["latin"], variable: "--font-sans", weight: ["400", "500", "600", "700", "800"] });
+const sans = Jost({ subsets: ["latin"], variable: "--font-sans", weight: ["300", "400", "500"] });
 
 export const metadata: Metadata = {
   title: "Grand Hotel Begnas — Lekhnath, Pokhara",
   description:
-    "A classic lakeside hotel on Begnas Sadak, two hundred steps from Begnas Lake. Thirteen quiet rooms, a restaurant and bar, and the Annapurnas on the horizon. Book direct by phone for the best rate.",
+    "A lakeside maison in Lekhnath, Pokhara — thirteen rooms two hundred steps from Begnas Lake, beneath the Annapurnas. Book direct by telephone for the best rate.",
   openGraph: { title: "Grand Hotel Begnas", description: hotel.tagline, type: "website" },
 };
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0F1930" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#FFFFFF" };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Hotel",
   name: hotel.name,
-  description: "Classic lakeside hotel steps from Begnas Lake, Lekhnath, Pokhara.",
+  description: "Lakeside hotel steps from Begnas Lake, Lekhnath, Pokhara.",
   telephone: hotel.phone,
   address: {
     "@type": "PostalAddress",
@@ -44,10 +44,10 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="bg-paper font-sans text-ink">
+      <body className="bg-paper font-sans font-light text-ink">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Header />
-        <main className="pb-16 md:pb-0">{children}</main>
+        <main>{children}</main>
         <Footer />
         <StickyBar />
       </body>

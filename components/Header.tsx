@@ -1,102 +1,99 @@
 "use client";
-// Masthead — editorial style: hairline rules, a centred wordmark,
-// split navigation. Transparent over the hero, ivory when scrolled.
+// After Cheval Blanc: a near-invisible top bar — "Menu" at left, the
+// wordmark centred, the telephone at right. The menu is a white panel
+// sliding from the left, Book first.
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, Phone, X } from "lucide-react";
+import { X } from "lucide-react";
 import { hotel } from "@/lib/config";
 
-const left = [
-  { href: "/rooms", label: "Rooms" },
+const nav = [
+  { href: "/rooms", label: "The Rooms" },
   { href: "/gallery", label: "Gallery" },
-];
-const right = [
-  { href: "/contact", label: "Contact" },
   { href: "/book", label: "Reservations" },
+  { href: "/contact", label: "Access & Contact" },
 ];
-const all = [...left, ...right];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
+    const on = () => setScrolled(window.scrollY > window.innerHeight * 0.72);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
   const solid = scrolled || open;
-  const tone = solid ? "text-ink" : "text-white";
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? "bg-paper/95 shadow-[0_1px_0_#E3D9C4] backdrop-blur" : "bg-gradient-to-b from-ink-deep/50 to-transparent"
-      }`}
-    >
-      <div className="wrap grid h-[72px] grid-cols-[1fr_auto_1fr] items-center">
-        <nav className="hidden items-center gap-8 lg:flex">
-          {left.map((l) => (
-            <Link key={l.href} href={l.href} className={`text-[13px] font-semibold uppercase tracking-[0.18em] ${tone} hover:opacity-60`}>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-[60] transition-all duration-500 ${
+          solid ? "bg-white/95 shadow-[0_1px_0_#E7E1D8] backdrop-blur" : "bg-gradient-to-b from-black/25 to-transparent"
+        }`}
+      >
+        <div
+          className={`mx-auto flex max-w-[1400px] items-center justify-between px-5 transition-all duration-500 md:px-10 ${
+            solid ? "py-3 text-ink" : "py-5 text-white"
+          }`}
+        >
+          <button
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            className="flex min-h-[44px] items-center gap-2.5 text-[13px] uppercase tracking-[0.14em]"
+          >
+            <span className="block h-[9px] w-5 border-y border-current" /> Menu
+          </button>
+          <Link href="/" className="text-center leading-none" onClick={() => setOpen(false)}>
+            <span className="block pl-[0.34em] font-display text-[19px] font-medium uppercase tracking-[0.34em] md:text-[23px]">
+              Grand Begnas
+            </span>
+            <span className="mt-1 block pl-[0.42em] text-[8.5px] uppercase tracking-[0.42em] opacity-75">
+              Lekhnath · Pokhara
+            </span>
+          </Link>
+          <a href={`tel:${hotel.phone}`} className="flex min-h-[44px] items-center text-[12.5px] tracking-[0.1em] max-sm:text-[11px]">
+            {hotel.phoneDisplay}
+          </a>
+        </div>
+      </header>
+
+      <div
+        className={`fixed inset-0 z-[70] bg-ink/35 transition-opacity duration-500 ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        onClick={() => setOpen(false)}
+      />
+      <aside
+        className={`fixed inset-y-0 left-0 z-[80] flex w-[min(86vw,360px)] flex-col bg-white p-[26px_30px] shadow-[30px_0_60px_rgba(46,42,38,0.12)] transition-transform duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+          open ? "translate-x-0" : "-translate-x-[102%]"
+        }`}
+        aria-hidden={!open}
+      >
+        <button onClick={() => setOpen(false)} aria-label="Close menu" className="flex h-11 w-11 items-center justify-center self-end">
+          <X size={24} strokeWidth={1.25} />
+        </button>
+        <Link href="/book" onClick={() => setOpen(false)} className="btn-taupe mt-2 w-full">
+          Book
+        </Link>
+        <nav className="mt-8">
+          {nav.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="block border-b border-line py-[11px] font-display text-[26px] font-normal"
+            >
               {l.label}
             </Link>
           ))}
         </nav>
-        <button aria-label="Open menu" onClick={() => setOpen(true)} className={`flex h-11 w-11 items-center justify-center lg:hidden ${tone}`}>
-          <Menu size={24} />
-        </button>
-
-        <Link href="/" className={`text-center leading-none ${tone}`} onClick={() => setOpen(false)}>
-          <span className="block font-display text-[26px] font-semibold tracking-[0.08em]">GRAND</span>
-          <span className={`mt-1 block text-[9px] font-bold uppercase tracking-mega ${solid ? "text-brass" : "text-brass-pale"}`}>
-            Hotel Begnas · Lekhnath
-          </span>
-        </Link>
-
-        <div className="flex items-center justify-end gap-8">
-          <nav className="hidden items-center gap-8 lg:flex">
-            {right.map((l) => (
-              <Link key={l.href} href={l.href} className={`text-[13px] font-semibold uppercase tracking-[0.18em] ${tone} hover:opacity-60`}>
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-          <a href={`tel:${hotel.phone}`} className={`hidden items-center gap-2 text-sm font-bold sm:flex ${tone}`}>
-            <Phone size={15} className="text-brass" /> {hotel.phoneDisplay}
-          </a>
-          <Link href="/book" className="btn-brass !px-4 !py-2 text-[13px] lg:hidden xl:inline-flex">
-            Reserve
-          </Link>
-        </div>
-      </div>
-
-      {open && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-paper lg:hidden">
-          <div className="wrap flex h-[72px] items-center justify-between">
-            <span className="font-display text-xl font-semibold tracking-[0.08em]">GRAND</span>
-            <button aria-label="Close menu" onClick={() => setOpen(false)} className="flex h-11 w-11 items-center justify-center">
-              <X size={26} />
-            </button>
-          </div>
-          <nav className="wrap flex flex-1 flex-col justify-center gap-2">
-            {all.map((l, i) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="flex items-baseline gap-4 border-b border-line py-4"
-              >
-                <span className="text-xs font-bold text-brass">0{i + 1}</span>
-                <span className="font-display text-3xl font-medium">{l.label}</span>
-              </Link>
-            ))}
-            <a href={`tel:${hotel.phone}`} className="btn-brass mt-8">
-              <Phone size={16} /> Call {hotel.phoneDisplay}
-            </a>
-            <p className="mt-4 text-center text-xs text-ink-soft">Check-in {hotel.checkIn} · Check-out {hotel.checkOut}</p>
-          </nav>
-        </div>
-      )}
-    </header>
+        <p className="mt-auto text-[12.5px] leading-[1.7] text-ink-mute">
+          Grand Hotel Begnas
+          <br />
+          Begnas Sadak, Lekhnath, Pokhara
+          <br />
+          Check-in {hotel.checkIn} · Check-out {hotel.checkOut}
+        </p>
+      </aside>
+    </>
   );
 }

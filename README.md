@@ -5,15 +5,21 @@
 Branch: `hotel/grand-hotel-begnas` in TIWARIANKIT10/lekhnath-view-tower-demo.
 
 A premium, mobile-first Next.js 14 site built specifically for this hotel.
-Design: **"Grand Editorial"** — a bespoke build (2026-10-30 redesign,
-replacing the first version, which shared a template with the other hotel
-sites): ivory paper, ink navy and brass; Playfair Display + Manrope;
-a centred GRAND masthead with split navigation, a still crossfade hero,
-numbered editorial sections (01 Stay · 02 At the Grand · 03 The Guest Book ·
-04 Reservations), rooms as alternating editorial spreads, a colophon
-footer. No Three.js, no shared components with any other hotel site.
-Fully responsive; booking = call-direct (landline only) + Booking.com
-partner deep links from lib/booking.ts.
+Design (2026-10-30, third iteration): the **Cheval Blanc language** — the
+reference the business owner chose (chevalblanc.com, LVMH's Maisons).
+White and ivory, warm charcoal-brown ink, one muted taupe; Cormorant
+Garamond (light, Title Case) for emotion, Jost for information; sharp
+corners everywhere. Near-invisible top bar (Menu · wordmark · telephone)
+with a white slide-in menu panel, Book first. Full-viewport crossfade hero
+with the white Arrival/Departure/Book bar; rooms presented like villas —
+photograph, serif name, one evocative line, underlined Discover (prices
+deferred to Reservations); editorial spreads for the lake and the table;
+a full-bleed mountain moment; the guest book (real published ratings
+only); a floating "Plan Your Escape" invitation while scrolling.
+Booking = call-direct (the hotel publishes a landline only) + Booking.com
+partner deep links from lib/booking.ts. Earlier iterations (shared
+template, then "Grand Editorial") were rejected by the owner and fully
+replaced — no code from them survives.
 
 ## About this hotel (verified 2026-10-30 from OTA/Places listings)
 

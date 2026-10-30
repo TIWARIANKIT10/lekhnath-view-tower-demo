@@ -1,31 +1,28 @@
 import Link from "next/link";
 import { hotel } from "@/lib/config";
 
-// Footer — a centred colophon: monogram, address, one line of small print.
+// A white, centred colophon — the maison manner.
 export default function Footer() {
   return (
-    <footer className="bg-ink-deep pb-24 pt-16 text-center text-white md:pb-14">
-      <div className="wrap">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-brass font-display text-2xl text-brass-light">
-          G
-        </div>
-        <p className="mt-5 font-display text-[26px] font-medium tracking-[0.06em]">GRAND HOTEL BEGNAS</p>
-        <p className="mt-2 text-sm text-white/60">{hotel.address}</p>
-        <a href={`tel:${hotel.phone}`} className="mt-1 block text-sm font-semibold text-white/85">
+    <footer className="border-t border-line bg-white px-5 pb-[calc(46px+env(safe-area-inset-bottom))] pt-[70px] text-center">
+      <p className="pl-[0.32em] font-display text-[21px] font-medium uppercase tracking-[0.32em]">Grand Begnas</p>
+      <p className="mt-3.5 text-sm leading-[1.8] text-ink-mute">
+        {hotel.address}
+        <br />
+        <a href={`tel:${hotel.phone}`} className="text-ink-soft">
           {hotel.phoneDisplay}
         </a>
-        <nav className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70">
-          <Link href="/rooms" className="hover:text-white">Rooms</Link>
-          <Link href="/gallery" className="hover:text-white">Gallery</Link>
-          <Link href="/book" className="hover:text-white">Reservations</Link>
-          <Link href="/contact" className="hover:text-white">Contact</Link>
-        </nav>
-        <div className="mx-auto mt-10 h-px w-24 bg-brass/60" />
-        <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-white/40">
-          Concept website prepared for Grand Hotel Begnas. Rates and photographs are indicative, drawn from the hotel's
-          public listings, and to be confirmed with the hotel before going live.
-        </p>
-      </div>
+      </p>
+      <nav className="mt-[30px] flex flex-wrap justify-center gap-x-[30px] gap-y-3 text-[12.5px] uppercase tracking-[0.2em]">
+        <Link href="/rooms">Rooms</Link>
+        <Link href="/gallery">Gallery</Link>
+        <Link href="/book">Reservations</Link>
+        <Link href="/contact">Contact</Link>
+      </nav>
+      <p className="mx-auto mt-9 max-w-[520px] text-[11.5px] leading-[1.8] text-[#A89F93]">
+        A website prepared for Grand Hotel Begnas. Photographs and rates are indicative, drawn from the hotel's public
+        listings, and to be confirmed with the hotel before going live.
+      </p>
     </footer>
   );
 }
