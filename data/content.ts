@@ -3,66 +3,76 @@ export type Room = {
   bed: string; perks: string[]; img: string; tag?: string;
 };
 
+// Real room categories from the resort's own fact sheet (Resort View,
+// Lake View, Mountain View, Premium View Deluxe). Rates indicative from
+// OTA ranges ($94–250) — confirm the resort's real direct rates.
 export const rooms: Room[] = [
   {
-    slug: "deluxe-double", name: "Deluxe Double Room", line: "Wake up to Annapurna.",
-    price: 23, guests: 2, bed: "Double bed", tag: "Most loved",
-    perks: ["Balcony", "Mountain view", "Free Wi-Fi", "Ensuite bath"],
-    img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    slug: "budget-twin", name: "Budget Twin Room", line: "Simple, clean, quiet.",
-    price: 18, guests: 2, bed: "2 single beds",
-    perks: ["Garden view", "Free Wi-Fi", "Ensuite bath"],
+    slug: "premium-view-deluxe", name: "Premium View Deluxe", line: "The full panorama, from your bed.",
+    price: 175, guests: 2, bed: "King bed", tag: "Best view",
+    perks: ["Private balcony", "Lake & Himalaya view", "Bathtub + rain shower", "Minibar · Free Wi-Fi"],
     img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    slug: "family-eco", name: "Family Eco Room", line: "Space for everyone, farm at your door.",
-    price: 32, guests: 4, bed: "Double + 2 singles", tag: "Families",
-    perks: ["Lake view", "Balcony", "Free Wi-Fi", "Room service"],
-    img: "https://images.unsplash.com/photo-1591088398332-8a7791972843?q=80&w=1200&auto=format&fit=crop",
+    slug: "mountain-view-deluxe", name: "Mountain View Deluxe", line: "Fishtail and the Annapurnas, framed.",
+    price: 150, guests: 2, bed: "King or twin queen", tag: "Mountain view",
+    perks: ["Private balcony", "Himalaya view", "Bathtub + rain shower", "Minibar · Free Wi-Fi"],
+    img: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    slug: "lake-view-deluxe", name: "Lake View Deluxe", line: "Rupa and Begnas, far below.",
+    price: 135, guests: 2, bed: "King or twin queen", tag: "Lake view",
+    perks: ["Private balcony", "Twin-lake view", "Bathtub + rain shower", "Minibar · Free Wi-Fi"],
+    img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    slug: "resort-view-deluxe", name: "Resort View Deluxe", line: "Stone cottages, garden calm.",
+    price: 110, guests: 2, bed: "King or twin queen",
+    perks: ["Private balcony", "Garden & resort view", "Bathtub + rain shower", "Minibar · Free Wi-Fi"],
+    img: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
 export const experiences = [
   {
-    title: "The View Tower", line: "360° — Annapurna, Manaslu, Begnas & Rupa in one turn.",
-    img: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop",
+    title: "The Infinity Pool", line: "Turquoise water running into a horizon of lakes and white peaks — the resort's signature hour.",
+    img: "https://images.unsplash.com/photo-1540541338287-3657?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: "Eco Farm Table", line: "Organic food, grown here, served on the rooftop.",
-    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop",
+    title: "Spa & Stillness", line: "Steam, sauna, jacuzzi and massage above the clouds — book ahead, float after.",
+    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: "Two Lakes, One Stay", line: "Begnas 3.6 km. Rupa, a short walk beyond.",
-    img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
+    title: "Royal Trek & Village Walks", line: "Guided walks along the Royal Trek route and down through traditional villages to Rupa Lake.",
+    img: "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
+// Ratings summaries + one real guest quote, all attributed.
 export const reviews = [
-  { text: "The rooftop view is super beautiful. The food was abundant and organic, and the room perfect.", source: "Google review" },
-  { text: "A true heaven for nature lovers — beauty, and a real commitment to sustainability.", source: "Google review" },
-  { text: "The best location in Lekhnath. Panoramic Annapurna and Manaslu views, right from the window.", source: "Google review" },
+  { text: "Absolutely stunning resort! The views of the Annapurna range and Rupa and Begnas Lakes are breathtaking… the infinity pool is pure serenity.", source: "Trip.com guest" },
+  { text: "Rated 8.7 'Excellent' across 2,469 ratings collected from top booking sites.", source: "Trivago Rating Index" },
+  { text: "8.3 'Very Good' from 182 verified guest ratings — the view gets mentioned again and again.", source: "HotelsCombined" },
 ];
 
 export const gallery = [
+  { img: "https://images.unsplash.com/photo-1540541338287-3657?q=80&w=1200&auto=format&fit=crop", label: "Infinity pool" },
   { img: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop", label: "Annapurna panorama" },
-  { img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop", label: "The hotel" },
-  { img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop", label: "Deluxe Double" },
-  { img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop", label: "Rooftop restaurant" },
-  { img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop", label: "Lake view" },
-  { img: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1200&auto=format&fit=crop", label: "Evenings" },
+  { img: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200&auto=format&fit=crop", label: "Stone cottages" },
+  { img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1200&auto=format&fit=crop", label: "The spa" },
+  { img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop", label: "Panorama Restaurant" },
+  { img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop", label: "Lakes below" },
 ];
 
 export const distances = [
-  { place: "Begnas Lake", time: "3.6 km" },
-  { place: "Rupa Lake", time: "10 min walk*" },
-  { place: "Pokhara Intl. Airport", time: "13 km" },
-  { place: "Lakeside, Pokhara", time: "19 km" },
+  { place: "Rupa Lake", time: "Below the ridge" },
+  { place: "Begnas Lake", time: "15.9 km" },
+  { place: "Pokhara Lakeside", time: "25 km · shuttle runs" },
+  { place: "Pokhara Intl. Airport", time: "~1 hr drive" },
 ];
 
 export const heroImages = [
+  "https://images.unsplash.com/photo-1540541338287-3657?q=80&w=2000&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop",
 ];

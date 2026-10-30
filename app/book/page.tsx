@@ -3,7 +3,7 @@ import BookingBar from "@/components/BookingBar";
 import { hotel } from "@/lib/config";
 import { Phone } from "lucide-react";
 
-export const metadata: Metadata = { title: "Book direct — Hotel Lekhnath View Tower & Eco Farm" };
+export const metadata: Metadata = { title: "Book direct — Rupakot Resort" };
 
 export default function BookPage({ searchParams }: { searchParams: { room?: string } }) {
   return (
