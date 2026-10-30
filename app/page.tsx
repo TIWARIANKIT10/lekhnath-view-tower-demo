@@ -1,6 +1,4 @@
 const REPO = "https://github.com/TIWARIANKIT10/lekhnath-view-tower-demo";
-const PREV = (b: string) =>
-  "https://lekhnath-view-tower-demo-git-" + b.replaceAll("/", "-") + "-tiwariankit10s-projects.vercel.app";
 
 type Site = {
   n: string; name: string; area: string; badge: string; pitch: string;
@@ -11,43 +9,43 @@ const sites: Site[] = [
   { n: "Hotel #0", name: "Hotel Lekhnath View Tower & Eco Farm", area: "Lekhnath · the first target", badge: "Branch",
     pitch: "The original demo that started this business — 360° view tower, eco farm, WhatsApp booking. Now on its own branch, like every other hotel.",
     chips: ["4.8★ Google", "9.8 Booking.com", "+977 985-6052139"], colors: ["#123528", "#d9a441"],
-    site: PREV("hotel/lekhnath-view-tower"), code: REPO + "/tree/hotel/lekhnath-view-tower" },
+    site: "/hotels/lekhnath-view-tower/", code: REPO + "/tree/hotel/lekhnath-view-tower" },
   { n: "Enhanced v2", name: "View Tower — Enhanced Edition", area: "Same hotel, Framer Motion + Three.js upgrade", badge: "Branch",
     pitch: "The cinematic upgrade of the demo: firefly hero, motion design, Booking.com links.",
     chips: ["Branch design-v2", "Booking.com links"], colors: ["#0c2b21", "#e8b34b"],
-    site: PREV("design-v2"), code: REPO + "/tree/design-v2" },
+    site: "/hotels/view-tower-v2/", code: REPO + "/tree/design-v2" },
   { n: "Hotel #1", name: "Grand Hotel Begnas", area: "Begnas Sadak · 13 rooms", badge: "Branch",
     pitch: "Loved (Expedia 10/10) but invisible — landline-only, no website at all.",
     chips: ["Call booking", "+977 61-561129", "Navy / gold design"], colors: ["#0a1628", "#c9a24b"],
-    site: PREV("hotel/grand-hotel-begnas"), code: REPO + "/tree/hotel/grand-hotel-begnas" },
+    site: "/hotels/grand-hotel-begnas/", code: REPO + "/tree/hotel/grand-hotel-begnas" },
   { n: "Hotel #2", name: "Hotel Seven Lake Paradise", area: "Begnastaal-11 · 15 rooms, 3-star", badge: "Branch",
     pitch: "Premium rooms, scattered reputation — the fix is one strong direct channel.",
     chips: ["WhatsApp booking", "NPR 8,790–16,538", "Teal / coral design"], colors: ["#04211d", "#ff7a59"],
-    site: PREV("hotel/hotel-seven-lake-paradise"), code: REPO + "/tree/hotel/hotel-seven-lake-paradise" },
+    site: "/hotels/hotel-seven-lake-paradise/", code: REPO + "/tree/hotel/hotel-seven-lake-paradise" },
   { n: "Hotel #3", name: "Seven Lakes Resort", area: "29 Bhandardhik · 19 rooms, two pools", badge: "Branch",
     pitch: "688 Google reviews of demand leaking through an old http site.",
     chips: ["WhatsApp booking", "Google 4.7 · 688", "Forest / amber design"], colors: ["#12291a", "#e8a33d"],
-    site: PREV("hotel/seven-lakes-resort"), code: REPO + "/tree/hotel/seven-lakes-resort" },
+    site: "/hotels/seven-lakes-resort/", code: REPO + "/tree/hotel/seven-lakes-resort" },
   { n: "Hotel #4", name: "Hotel Young's Stupa", area: "Lekhnath-09 · 12 rooms, rooftop", badge: "Branch",
     pitch: "Guests rate it 9.7 — OTAs sell it from $7. Underpriced and unreachable.",
     chips: ["Call booking", "Trip.com 9.7", "Plum / saffron design"], colors: ["#191423", "#e8a33d"],
-    site: PREV("hotel/hotel-youngs-stupa"), code: REPO + "/tree/hotel/hotel-youngs-stupa" },
+    site: "/hotels/hotel-youngs-stupa/", code: REPO + "/tree/hotel/hotel-youngs-stupa" },
   { n: "Hotel #5", name: "Begnas Lake Front Guest House", area: "31 Majhikuna · 12 rooms, on the shore", badge: "Branch",
     pitch: "Best shore in Majhikuna — its 'website' is its Facebook page.",
     chips: ["WhatsApp booking", "Family-run · yoga hall", "Slate / terracotta design"], colors: ["#0c1b26", "#c75b39"],
-    site: PREV("hotel/begnas-lake-front-guest-house"), code: REPO + "/tree/hotel/begnas-lake-front-guest-house" },
+    site: "/hotels/begnas-lake-front-guest-house/", code: REPO + "/tree/hotel/begnas-lake-front-guest-house" },
   { n: "Hotel #6", name: "Robin's Nest Hotel & Restaurant", area: "Deorali · garden hilltop, host Nima", badge: "Branch",
     pitch: "Tripadvisor 4.8 and no phone number anywhere on the internet.",
     chips: ["Booking.com-primary", "TA 4.8 · real quotes", "Olive / rose design"], colors: ["#1c2410", "#c25e7c"],
-    site: PREV("hotel/robins-nest"), code: REPO + "/tree/hotel/robins-nest" },
+    site: "/hotels/robins-nest/", code: REPO + "/tree/hotel/robins-nest" },
   { n: "Hotel #7", name: "Rupakot Resort", area: "Rupakot ridge, 1,100 m · 42 rooms", badge: "Redesign",
     pitch: "A proven 4-star resort (8.7 across 2,469 ratings) whose site undersells it.",
     chips: ["WhatsApp booking", "Trivago 8.7 · 2,469", "Charcoal / copper design"], colors: ["#171310", "#a9713b"],
-    site: PREV("hotel/rupakot-resort"), code: REPO + "/tree/hotel/rupakot-resort" },
+    site: "/hotels/rupakot-resort/", code: REPO + "/tree/hotel/rupakot-resort" },
   { n: "Hotel #8", name: "The Begnas Lake Resort & Villas", area: "Sundari Danda · 38 rooms, cottages & suites", badge: "Redesign",
     pitch: "The original Begnas resort — 9.9s for location and staff, a tired brochure website.",
     chips: ["WhatsApp booking", "Kayak 9.0 · Wonderful", "Moss / apricot design"], colors: ["#131a12", "#d97d3e"],
-    site: PREV("hotel/begnas-lake-resort"), code: REPO + "/tree/hotel/begnas-lake-resort" },
+    site: "/hotels/begnas-lake-resort/", code: REPO + "/tree/hotel/begnas-lake-resort" },
 ];
 
 const queue: [string, string, string][] = [
@@ -79,7 +77,7 @@ export default function Home() {
           <div className="stat"><b>1</b>repo, one branch each</div>
         </div>
         <div className="bar"><i /></div>
-        <p className="note"><b>How opening works:</b> every hotel — the View Tower included — lives on <b>its own branch</b> with its own Vercel preview. Those previews ask for <b>your Vercel login</b> first (deployment protection keeps them private until you pitch). The <b>Code + pitch</b> button always works: it opens the branch with its README — hotel facts, the pitch, and what to say to the owner.</p>
+        <p className="note"><b>How opening works:</b> every website below is <b>hosted right here</b>, under this site's own address — tap <b>Open site</b> and it opens instantly, no login, ready to send to a hotel owner on WhatsApp. The full source code lives on <b>one GitHub branch per hotel</b>: <b>Code + pitch</b> opens that branch with its README — the hotel's facts, the pitch, and what to say to the owner.</p>
       </header>
 
       <h2>Ready to show</h2>
