@@ -23,8 +23,8 @@ export default function Header() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${dark ? "bg-cream/95 shadow-card backdrop-blur" : "bg-gradient-to-b from-pine-950/60 to-transparent"}`}>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className={`leading-tight ${dark ? "text-pine-950" : "text-white"}`} onClick={() => setOpen(false)}>
-          <span className="font-display text-[17px] font-semibold tracking-tight">Lekhnath View Tower</span>
-          <span className={`block text-[10px] font-medium uppercase tracking-[0.22em] ${dark ? "text-sand-500" : "text-sand-400"}`}>Hotel & Eco Farm · Pokhara</span>
+          <span className="font-display text-[17px] font-semibold tracking-tight">Begnas Lake Front</span>
+          <span className={`block text-[10px] font-medium uppercase tracking-[0.22em] ${dark ? "text-sand-500" : "text-sand-400"}`}>Majhikuna · Pokhara</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
