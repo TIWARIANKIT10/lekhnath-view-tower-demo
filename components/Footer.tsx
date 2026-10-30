@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <footer className="bg-pine-950 pb-28 pt-12 text-white md:pb-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="font-display text-2xl font-semibold">Lekhnath View Tower</p>
-        <p className="mt-1 text-sm text-white/60">Hotel & Eco Farm · Lekhnath, Pokhara</p>
+        <p className="font-display text-2xl font-semibold">Seven Lakes Resort</p>
+        <p className="mt-1 text-sm text-white/60">Bhandardhik · Lekhnath, Pokhara</p>
         <div className="mt-6 space-y-2.5 text-[15px]">
           <a href={hotel.mapsUrl} target="_blank" rel="noreferrer" className="flex items-start gap-2 text-white/85"><MapPin size={18} className="mt-0.5 shrink-0 text-sand-400" /> {hotel.address}</a>
           <a href={`tel:${hotel.phone}`} className="flex items-center gap-2 text-white/85"><Phone size={18} className="shrink-0 text-sand-400" /> {hotel.phoneDisplay}</a>

@@ -1,14 +1,21 @@
 "use client";
-import { useEffect, useRef, type ReactNode } from "react";
+// Scroll-reveal wrapper powered by Framer Motion (whileInView).
+// Keeps the original <Reveal> API; `delay` (seconds) enables stagger.
+import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
 
-export default function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); }
-    }, { threshold: 0.12 });
-    io.observe(el); return () => io.disconnect();
-  }, []);
-  return <div ref={ref} className={`reveal ${className}`}>{children}</div>;
+export default function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-8% 0px" }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
 }
