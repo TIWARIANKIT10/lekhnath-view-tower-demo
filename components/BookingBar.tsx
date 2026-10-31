@@ -14,12 +14,13 @@ import { rooms } from "@/data/content";
 export function HeroBar() {
   const router = useRouter();
   const [stay, setStay] = useState<StayQuery>(defaultStay);
-  const cell = "flex-1 px-4 py-3";
+  const cell = "min-w-0 flex-1 px-3 py-3 sm:px-4";
   const label = "mb-1 block text-[9.5px] font-normal uppercase tracking-[0.24em] text-ink-mute";
-  const input = "w-full bg-transparent text-[15px] font-normal text-ink outline-none";
+  // 16px on phones: below that, iOS Safari zooms the page on focus.
+  const input = "w-full min-w-0 bg-transparent text-base font-normal text-ink outline-none sm:text-[15px]";
   return (
     <form
-      className="mx-auto flex max-w-[620px] flex-wrap bg-white text-left shadow-[0_24px_50px_rgba(20,17,14,0.28)]"
+      className="mx-auto flex w-full max-w-[620px] flex-wrap bg-white text-left shadow-[0_24px_50px_rgba(20,17,14,0.28)]"
       onSubmit={(e) => {
         e.preventDefault();
         router.push(`/book?ci=${stay.checkIn}&co=${stay.checkOut}`);
@@ -69,7 +70,7 @@ export default function BookingBar({
   const room = rooms.find((r) => r.slug === roomSlug);
   const total = room && nights ? room.price * nights * stay.rooms : null;
 
-  const field = "w-full border border-line bg-white px-3 py-3 text-[15px] font-normal text-ink outline-none transition focus:border-taupe";
+  const field = "w-full min-w-0 border border-line bg-white px-3 py-3 text-base font-normal text-ink outline-none transition focus:border-taupe sm:text-[15px]";
   const label = "mb-1.5 block text-[10px] font-normal uppercase tracking-[0.22em] text-ink-mute";
   const set =
     (k: keyof StayQuery) =>
@@ -78,8 +79,8 @@ export default function BookingBar({
 
   return (
     <div className="border border-line bg-white p-5 text-left sm:p-7">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <div>
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+        <div className="col-span-2 lg:col-span-1">
           <label className={label}>Room</label>
           <select className={field} value={roomSlug} onChange={(e) => setRoomSlug(e.target.value)}>
             <option value="">Any room</option>

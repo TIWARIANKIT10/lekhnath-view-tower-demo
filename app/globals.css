@@ -4,11 +4,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   background: #ffffff;
   color: #2e2a26;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -27,13 +29,13 @@ body {
     @apply text-[13px] font-normal tracking-[0.04em] text-ink-mute;
   }
   .btn-taupe {
-    @apply inline-flex min-h-[54px] items-center justify-center gap-2 bg-taupe px-8 text-[13px] font-medium uppercase tracking-[0.22em] text-white transition hover:bg-taupe-deep;
+    @apply inline-flex min-h-[54px] items-center justify-center gap-2 bg-taupe px-6 text-center text-[13px] font-medium uppercase leading-snug tracking-[0.15em] text-white transition hover:bg-taupe-deep sm:px-8 sm:tracking-[0.22em];
   }
   .btn-line {
-    @apply inline-flex min-h-[54px] items-center justify-center gap-2 border border-ink bg-transparent px-8 text-[13px] font-medium uppercase tracking-[0.22em] text-ink transition hover:bg-ink hover:text-white;
+    @apply inline-flex min-h-[54px] items-center justify-center gap-2 border border-ink bg-transparent px-6 text-center text-[13px] font-medium uppercase leading-snug tracking-[0.15em] text-ink transition hover:bg-ink hover:text-white sm:px-8 sm:tracking-[0.22em];
   }
   .btn-white {
-    @apply inline-flex min-h-[54px] items-center justify-center gap-2 bg-white px-8 text-[13px] font-medium uppercase tracking-[0.22em] text-ink transition hover:bg-ivory;
+    @apply inline-flex min-h-[54px] items-center justify-center gap-2 bg-white px-6 text-center text-[13px] font-medium uppercase leading-snug tracking-[0.15em] text-ink transition hover:bg-ivory sm:px-8 sm:tracking-[0.22em];
   }
   .discover {
     @apply inline-block text-[15px] font-normal underline decoration-1 underline-offset-[5px] hover:opacity-60;

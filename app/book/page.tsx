@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: "Reservations — Grand Hotel Begnas"
 
 export default function BookPage() {
   return (
-    <section className="wrap max-w-3xl pb-24 pt-32 md:pt-44">
+    <section className="wrap max-w-3xl pb-16 pt-32 sm:pb-24 md:pt-44">
       <div className="text-center">
         <p className="eyebrow">Reservations</p>
         <h1 className="mt-[18px] font-display text-[clamp(38px,7vw,56px)] font-normal leading-[1.1]">Book Your Stay</h1>

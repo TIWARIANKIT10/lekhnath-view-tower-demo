@@ -20,7 +20,7 @@ export default function StickyBar() {
   return (
     <Link
       href="/book"
-      className={`fixed bottom-[calc(18px+env(safe-area-inset-bottom))] left-1/2 z-[65] -translate-x-1/2 whitespace-nowrap border border-line bg-white/95 px-[26px] py-3.5 text-[12.5px] font-normal uppercase tracking-[0.2em] text-ink shadow-[0_14px_34px_rgba(46,42,38,0.18)] backdrop-blur transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+      className={`fixed bottom-[calc(18px+env(safe-area-inset-bottom))] left-1/2 z-[65] max-w-[calc(100vw-36px)] -translate-x-1/2 whitespace-nowrap border border-line bg-white/95 px-5 py-3.5 text-[12.5px] font-normal uppercase tracking-[0.2em] text-ink shadow-[0_14px_34px_rgba(46,42,38,0.18)] backdrop-blur transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] sm:px-[26px] ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[90px] opacity-0"
       }`}
     >

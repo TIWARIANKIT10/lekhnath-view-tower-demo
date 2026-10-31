@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
 
       {/* Welcome */}
-      <section className="px-5 py-24 md:py-[140px]">
+      <section className="px-5 py-16 sm:py-24 md:py-[140px]">
         <Reveal className="mx-auto max-w-[620px] text-center">
           <h2 className="font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">
             Step into the World
@@ -34,7 +34,7 @@ export default function Home() {
       </section>
 
       {/* The Rooms */}
-      <section id="rooms" className="bg-ivory px-5 py-24 md:py-[140px]">
+      <section id="rooms" className="bg-ivory px-5 py-16 sm:py-24 md:py-[140px]">
         <div className="wrap !px-0">
           <Reveal className="text-center">
             <p className="eyebrow">Stay</p>
@@ -42,7 +42,7 @@ export default function Home() {
           </Reveal>
           <div className="mt-4">
             {rooms.map((r) => (
-              <Reveal key={r.slug} className="mt-[74px]">
+              <Reveal key={r.slug} className="mt-12 sm:mt-[74px]">
                 <RoomCard room={r} />
               </Reveal>
             ))}
@@ -51,7 +51,7 @@ export default function Home() {
       </section>
 
       {/* The Lake */}
-      <section id="lake" className="px-5 py-24 md:py-[140px]">
+      <section id="lake" className="px-5 py-16 sm:py-24 md:py-[140px]">
         <div className="wrap grid items-center gap-[34px] !px-0 md:grid-cols-2 md:gap-20">
           <Reveal className="relative aspect-[3/3.8] overflow-hidden">
             <Image src={lake.img} alt={lake.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
@@ -75,7 +75,7 @@ export default function Home() {
       </section>
 
       {/* The Table */}
-      <section className="px-5 pb-24 md:pb-[140px]">
+      <section className="px-5 pb-16 sm:pb-24 md:pb-[140px]">
         <div className="wrap grid items-center gap-[34px] !px-0 md:grid-cols-2 md:gap-20">
           <Reveal className="relative aspect-[3/3.8] overflow-hidden md:order-2">
             <Image src={table.img} alt={table.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
@@ -122,7 +122,7 @@ export default function Home() {
       </section>
 
       {/* The Guest Book */}
-      <section className="px-5 py-24 md:py-[140px]">
+      <section className="px-5 py-16 sm:py-24 md:py-[140px]">
         <Reveal className="mx-auto max-w-[760px] text-center">
           <p className="eyebrow">The guest book</p>
           <p className="mt-[18px] font-display text-[clamp(30px,6vw,46px)] font-normal leading-[1.25]">
@@ -137,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Reservations */}
-      <section className="bg-ivory px-5 py-24 text-center md:py-[140px]">
+      <section className="bg-ivory px-5 py-16 text-center sm:py-24 md:py-[140px]">
         <Reveal className="mx-auto max-w-[680px]">
           <p className="eyebrow">Reservations</p>
           <h2 className="mt-[18px] font-display text-[clamp(34px,6.4vw,52px)] font-normal leading-[1.12]">Book Direct, Book Simply</h2>
@@ -149,10 +149,10 @@ export default function Home() {
             rooms are on Booking.com.
           </p>
           <div className="mt-[34px] flex flex-wrap justify-center gap-3.5">
-            <a href={`tel:${hotel.phone}`} className="btn-taupe">
+            <a href={`tel:${hotel.phone}`} className="btn-taupe max-sm:w-full">
               Call the Hotel
             </a>
-            <Link href="/book" className="btn-line">
+            <Link href="/book" className="btn-line max-sm:w-full">
               Book on Booking.com
             </Link>
           </div>

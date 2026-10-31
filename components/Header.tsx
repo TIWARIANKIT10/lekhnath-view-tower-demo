@@ -4,7 +4,8 @@
 // sliding from the left, Book first.
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Phone, X } from "lucide-react";
 import { hotel } from "@/lib/config";
 
 const nav = [
@@ -17,13 +18,19 @@ const nav = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > window.innerHeight * 0.72);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
-  const solid = scrolled || open;
+  // The transparent bar only works over the home hero's photography.
+  // Every other page has a white ground — the bar is solid there from
+  // the first pixel, instead of white text on white. (The hosted export
+  // carries a basePath, so home is recognised either way.)
+  const isHome = pathname === "/" || pathname?.endsWith("/hotels/grand-hotel-begnas") || pathname?.endsWith("/hotels/grand-hotel-begnas/");
+  const solid = scrolled || open || !isHome;
 
   return (
     <>
@@ -40,19 +47,29 @@ export default function Header() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
-            className="flex min-h-[44px] items-center gap-2.5 text-[13px] uppercase tracking-[0.14em]"
+            className="flex min-h-[44px] shrink-0 items-center gap-2 text-[12px] uppercase tracking-[0.14em] sm:gap-2.5 sm:text-[13px]"
           >
             <span className="block h-[9px] w-5 border-y border-current" /> Menu
           </button>
-          <Link href="/" className="text-center leading-none" onClick={() => setOpen(false)}>
-            <span className="block pl-[0.34em] font-display text-[19px] font-medium uppercase tracking-[0.34em] md:text-[23px]">
+          <Link href="/" className="min-w-0 text-center leading-none" onClick={() => setOpen(false)}>
+            <span className="block whitespace-nowrap pl-[0.24em] font-display text-[15.5px] font-medium uppercase tracking-[0.24em] sm:pl-[0.34em] sm:text-[19px] sm:tracking-[0.34em] md:text-[23px]">
               Grand Begnas
             </span>
-            <span className="mt-1 block pl-[0.42em] text-[8.5px] uppercase tracking-[0.42em] opacity-75">
+            <span className="mt-1 block whitespace-nowrap pl-[0.32em] text-[7.5px] uppercase tracking-[0.32em] opacity-75 sm:pl-[0.42em] sm:text-[8.5px] sm:tracking-[0.42em]">
               Lekhnath · Pokhara
             </span>
           </Link>
-          <a href={`tel:${hotel.phone}`} className="flex min-h-[44px] items-center text-[12.5px] tracking-[0.1em] max-sm:text-[11px]">
+          {/* On a phone the full number cannot share the bar with the
+              wordmark — it becomes a call button here, and stays written
+              out in Reservations, Contact and the footer. */}
+          <a
+            href={`tel:${hotel.phone}`}
+            aria-label={`Call the hotel, ${hotel.phoneDisplay}`}
+            className="flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center sm:hidden"
+          >
+            <Phone size={19} strokeWidth={1.5} />
+          </a>
+          <a href={`tel:${hotel.phone}`} className="hidden min-h-[44px] shrink-0 items-center text-[12.5px] tracking-[0.1em] sm:flex">
             {hotel.phoneDisplay}
           </a>
         </div>

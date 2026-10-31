@@ -32,7 +32,7 @@ export default function Hero() {
 
       <div className="relative z-10 w-full px-5 pb-[calc(30px+env(safe-area-inset-bottom))] text-center text-white">
         <p className="text-[12.5px] font-light tracking-[0.06em]">A lakeside maison in Lekhnath, Pokhara</p>
-        <h1 className="mx-auto mt-3.5 max-w-[12em] font-display text-[clamp(40px,9.4vw,76px)] font-normal leading-[1.06]">
+        <h1 className="mx-auto mt-3.5 max-w-[12em] font-display text-[clamp(34px,9.4vw,76px)] font-normal leading-[1.06]">
           Plan Your Escape
           <br />
           to the Lake

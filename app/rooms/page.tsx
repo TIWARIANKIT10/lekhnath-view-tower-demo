@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "The Rooms — Grand Hotel Begnas" };
 
 export default function RoomsPage() {
   return (
-    <section className="wrap pb-24 pt-32 md:pt-44">
+    <section className="wrap pb-16 pt-32 sm:pb-24 md:pt-44">
       <Reveal className="text-center">
         <p className="eyebrow">Stay</p>
         <h1 className="mt-[18px] font-display text-[clamp(38px,7vw,56px)] font-normal leading-[1.1]">The Rooms</h1>
@@ -18,7 +18,7 @@ export default function RoomsPage() {
       </Reveal>
       <div>
         {rooms.map((r) => (
-          <Reveal key={r.slug} className="mt-[74px]">
+          <Reveal key={r.slug} className="mt-12 sm:mt-[74px]">
             <RoomCard room={r} detail />
           </Reveal>
         ))}

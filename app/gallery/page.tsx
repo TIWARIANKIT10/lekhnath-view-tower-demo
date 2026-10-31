@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Gallery — Grand Hotel Begnas" };
 
 export default function GalleryPage() {
   return (
-    <section className="wrap pb-24 pt-32 md:pt-44">
+    <section className="wrap pb-16 pt-32 sm:pb-24 md:pt-44">
       <div className="text-center">
         <p className="eyebrow">Gallery</p>
         <h1 className="mt-[18px] font-display text-[clamp(38px,7vw,56px)] font-normal leading-[1.1]">The View Sells Itself</h1>

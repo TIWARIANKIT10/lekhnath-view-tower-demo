@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Access & Contact — Grand Hotel Beg
 
 export default function ContactPage() {
   return (
-    <section className="wrap max-w-3xl pb-24 pt-32 text-center md:pt-44">
+    <section className="wrap max-w-3xl pb-16 pt-32 text-center sm:pb-24 md:pt-44">
       <p className="eyebrow">Access & Contact</p>
       <h1 className="mt-[18px] font-display text-[clamp(38px,7vw,56px)] font-normal leading-[1.1]">Talk to the Hotel</h1>
       <p className="mx-auto mt-4 max-w-[32em] text-[15.5px] leading-[1.75] text-ink-soft">
