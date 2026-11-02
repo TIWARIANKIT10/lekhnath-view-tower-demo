@@ -1,41 +1,66 @@
-# Lekhnath Hotel Websites — Portfolio (main branch)
+# Raniban Retreat — one-page concept website
 
-This repo holds **every hotel website** built for Ankit's hotel
-Google-Profile + webpage business in Lekhnath / Pokhara, Nepal.
+Branch: `hotel/raniban-retreat` · Built 2026-11-02 at the owner's request after
+reviewing how Rupakot Resort's website (rupakotresort.com) works.
 
-## How this repo is organised
+## The hotel (facts checked 2026-11-02)
 
-- **`main` (this branch) = ONLY the portfolio listing website** — the
-  index page you are reading about, live at the project's Vercel
-  production URL. It links to every hotel site.
-- **Every hotel has its own branch** named `hotel/<slug>`, containing
-  that hotel's complete Next.js website plus a README with the
-  hotel's verified facts and a full owner-approach pitch.
+- **Raniban Retreat**, Raniban Forest ("Queen's Forest"), World Peace Pagoda
+  hill, Pumdi Bhumdi, Pokhara — above Phewa Lake, beside the World Peace
+  Pagoda. Opened 2012, renovated 2024, solar-powered eco boutique retreat.
+- 14 rooms per its own site (12 listed on Trip.com): Sunrise View Premium
+  Rooms (6, newest), Sunrise View Jacuzzi Room, Lake View Cottages and
+  Mountain View Cottages modelled on traditional Gurung cottages.
+- Infinity pool, spa & sauna, restaurant + bar, breakfast included, airport
+  shuttle, 24-hour front desk. Ratings: Trip.com 9.5/10, Hotels.com 9.2/10
+  "Wonderful"; OTA prices from ~US$99/night.
+- Contacts: reservations@raniban.com / info@raniban.com; primary phone
+  +977 980-2855466 (Trip.com). **Number conflict to resolve with the hotel:**
+  +977 984-1218466 is also published as the front-desk number, and
+  +977 976-7470541 appears on Trip.com. Confirm which number is the
+  WhatsApp number before launch.
+- Access: ~35 min from Pokhara International Airport; taxi from Lakeside
+  ≈ NPR 1,500; or ~522 stone steps up the forest trail from the lakeside.
+- Sales contact: Saksham (sales team) — replied to the pitch email on
+  2026-11-02 and invited a WhatsApp conversation. Owner's rules for that
+  conversation: no prices, no demo link unless asked.
 
-## Branch map
+## What was borrowed from Rupakot's approach (inspiration, not a copy)
 
-| Branch | Hotel |
-|---|---|
-| `hotel/lekhnath-view-tower` | Hotel Lekhnath View Tower & Eco Farm (Demo #0) |
-| `design-v2` | View Tower — Enhanced Edition (Framer Motion + Three.js) |
-| `hotel/grand-hotel-begnas` | #1 Grand Hotel Begnas |
-| `hotel/hotel-seven-lake-paradise` | #2 Hotel Seven Lake Paradise |
-| `hotel/seven-lakes-resort` | #3 Seven Lakes Resort |
-| `hotel/hotel-youngs-stupa` | #4 Hotel Young's Stupa |
-| `hotel/begnas-lake-front-guest-house` | #5 Begnas Lake Front Guest House |
-| `hotel/robins-nest` | #6 Robin's Nest Hotel & Restaurant |
-| `hotel/rupakot-resort` | #7 Rupakot Resort |
-| *(next)* | #8 The Begnas Lake Resort & Villas … through #20 Tiger Mountain Pokhara Lodge, strictly one by one |
+- Full-screen photo hero + serif-display/forest-green/cream/gold language,
+  spaced-capital labels, pill CTAs, full-screen overlay menu.
+- Their booking *model*: an engine flow — dates & guests → live rooms with
+  taxes-included prices → paid extras → guest details with a summary panel
+  → pay-at-the-property or card guarantee.
+- Testimonial carousel + an OTA ratings strip; rooms named by view.
 
-## Adding a hotel (the standing workflow)
+## What is ours / modernised
 
-1. Research the hotel's real facts (phone, rooms, ratings, prices).
-2. Build a distinct-design Next.js site (Framer Motion + Three.js,
-   provider-based Booking.com integration + direct WhatsApp/call).
-3. Typecheck, production build, local smoke test.
-4. Push to branch `hotel/<slug>`; verify the commit on GitHub.
-5. Add its card to `app/page.tsx` here on `main` and push `main`.
+- **Booking bar on the page itself** (Rupakot hides booking behind a
+  separate page) and a mobile sticky Call / WhatsApp / Book bar.
+- The booking flow ends in a **WhatsApp confirmation** to the retreat with
+  the full summary — no foreign engine iframe, no prepayment; WhatsApp is
+  also a general contact channel (Rupakot has none).
+- **Prices on the room cards** (Rupakot shows none outside its engine).
+- Sections Rupakot lacks on-page: dining, a seasonal package, FAQ,
+  map + how-to-reach.
+- **Our own animation throughout**: hero slideshow with a slow Ken Burns
+  zoom, drifting cloud edge, scroll-reveal sections, animated counters, a
+  drifting giant outline word, parallax dining band, testimonial
+  auto-carousel, marquee strip. (Rupakot's site is nearly static.)
+- Hotel JSON-LD schema for Google.
 
-Stack for the listing site: Next.js 14 · TypeScript · plain CSS.
-Each hotel branch: Next.js 14 · TypeScript · Tailwind · Framer
-Motion · Three.js.
+## Placeholders to confirm with the hotel before any commercial use
+
+- Nightly rates (US$99–149) and extras prices are demo values set inside
+  the published OTA range.
+- Photography is stand-in location photography of Pokhara / Phewa Lake /
+  the Peace Pagoda, not the retreat's own photos.
+- The "Sunrise & Unwind" package, 48-hour free-cancellation policy, and the
+  WhatsApp number above all need the retreat's confirmation.
+
+## Tech
+
+Next.js 14 + TypeScript + Tailwind, fully static one-pager, mobile-first.
+`npm run build` produces the site; the same build is exported to the
+listing site's `/hotels/raniban-retreat/` path for preview.

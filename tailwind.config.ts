@@ -1,20 +1,34 @@
 import type { Config } from "tailwindcss";
+
+// Raniban Retreat — its own design language: deep forest green of the
+// Raniban ("Queen's Forest"), warm cream, sunrise gold. Cormorant
+// Garamond for emotion, Manrope for information. Soft, rounded, calm.
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./data/**/*.{ts,tsx}"],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./data/**/*.ts"],
   theme: {
     extend: {
       colors: {
-        pine: { 950: "#0C1F1A", 900: "#122B23", 800: "#1A3A2F", 700: "#24503F", 100: "#DCE8E1", 50: "#F2F6F3" },
-        sand: { 500: "#C99B5F", 400: "#D9AE77", 100: "#F5EBDD" },
-        cream: "#FAF7F2"
+        pine: {
+          DEFAULT: "#1d3b2e",
+          deep: "#122619",
+          soft: "#2c5240",
+        },
+        cream: "#f7f2e7",
+        sand: "#efe6d3",
+        mist: "#dde5d5",
+        sage: "#9db89a",
+        gold: {
+          DEFAULT: "#c2a059",
+          soft: "#d9bc7f",
+        },
+        ink: "#1f2a23",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"]
+        serif: ["var(--font-cormorant)", "Georgia", "serif"],
+        sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
       },
-      boxShadow: { soft: "0 20px 50px -20px rgb(12 31 26 / 0.35)", card: "0 10px 30px -12px rgb(12 31 26 / 0.25)" }
-    }
+    },
   },
-  plugins: []
+  plugins: [],
 };
 export default config;
