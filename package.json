@@ -2,10 +2,15 @@
   "name": "lekhnath-hotel-websites",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start", "typecheck": "tsc --noEmit" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
     "lucide-react": "^0.460.0",
-    "next": "14.2.18",
+    "next": "^14.2.30",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

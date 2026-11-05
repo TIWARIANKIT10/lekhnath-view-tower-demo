@@ -39,7 +39,7 @@ h2{font-family:Georgia,serif; font-size:22px; margin:34px 0 14px}
 .dots{display:inline-flex; gap:5px; align-items:center}
 .dot{width:14px; height:14px; border-radius:50%; border:1px solid rgba(255,255,255,.25); display:inline-block}
 .links{display:flex; gap:8px; margin-top:auto; padding-top:8px}
-.btn{flex:1; text-align:center; text-decoration:none; font-weight:700; font-size:13.5px; padding:11px 8px; border-radius:12px}
+.btn{flex:1; text-align:center; text-decoration:none; font-weight:700; font-size:13.5px; padding:12px 8px; border-radius:12px; min-height:44px}
 .btn-site{background:var(--gold); color:#221a05}
 .btn-site:active{opacity:.85}
 .btn-code{background:var(--panel2); color:var(--text); border:1px solid var(--line)}
